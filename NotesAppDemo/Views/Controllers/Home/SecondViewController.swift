@@ -11,7 +11,9 @@ class SecondViewController: UIViewController, UITextViewDelegate {
     var button1: UIButton!
     var button2: UIButton!
     var textField: UITextView!
-
+    var titleTextField: UITextView!
+    var bodyTextField: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +23,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
     private func setupUI() {
         backButton = UIButton()
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
-
+        
         backButton.setTitleColor(.label, for: .normal)
         backButton.backgroundColor = .clear
         backButton.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +40,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
         button1 = UIButton()
-
+        
         button1.setImage(UIImage(named: "eyeImg"), for: .normal)
         button1.setTitleColor(.label, for: .normal)
         button1.backgroundColor = .clear
@@ -68,43 +70,78 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         
         let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
         let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
-
-        let titleAttributedString = NSAttributedString(string: "Title\n\n", attributes: titleAttributes)
-        let bodyAttributedString = NSAttributedString(string: "Type something...", attributes: bodyAttributes)
-
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(titleAttributedString)
-        attributedText.append(bodyAttributedString)
-
-        textField = UITextView()
-        textField.attributedText = attributedText
-        textField.backgroundColor = .black
-        textField.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(textField)
+        
+        titleTextField = UITextView()
+        titleTextField.text = "Title"
+        titleTextField.textColor = .lightGray
+        titleTextField.font = UIFont(name: "Nunito", size: 48)
+        titleTextField.backgroundColor = .black
+        titleTextField.translatesAutoresizingMaskIntoConstraints = false
+        titleTextField.delegate = self
+        
+        view.addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            textField.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            textField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            titleTextField.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 20),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            titleTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         
-        textField.delegate = self
+        bodyTextField = UITextView()
+        bodyTextField.text = "Type something..."
+        bodyTextField.textColor = .lightGray
+        bodyTextField.font = UIFont(name: "Nunito", size: 23)
+        bodyTextField.backgroundColor = .black
+        bodyTextField.translatesAutoresizingMaskIntoConstraints = false
+        bodyTextField.delegate = self
+        
+        view.addSubview(bodyTextField)
+        
+        NSLayoutConstraint.activate([
+            bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bodyTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
+            bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Title\n\nType something..." {
-            textView.text = ""
-            textView.textColor = .white
+        if textView == titleTextField {
+            if textView.text == "Title" {
+                textView.text = ""
+                textView.textColor = .white
+            }
+        } else if textView == bodyTextField {
+            if textView.text == "Type something..." {
+                textView.text = ""
+                textView.textColor = .white
+            }
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "Title\n\nType something..."
-            textView.textColor = .lightGray
+        if textView == titleTextField {
+            if textView.text.isEmpty {
+                textView.text = "Title"
+                textView.textColor = .lightGray
+            }
+        } else if textView == bodyTextField {
+            if textView.text.isEmpty {
+                textView.text = "Type something..."
+                textView.textColor = .lightGray
+            }
         }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    @objc func backButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -122,12 +159,5 @@ class SecondViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
-    @objc func backButtonTapped() {
-            self.dismiss(animated: true, completion: nil)
-       }
 }
+
