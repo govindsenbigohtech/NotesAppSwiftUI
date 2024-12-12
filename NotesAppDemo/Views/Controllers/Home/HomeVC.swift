@@ -11,8 +11,8 @@ class HomeVC: UIViewController {
     var notesImageView: UIImageView!
     var addButton: UIButton!
     var notesLabel: UILabel!
-    var image1: UIImageView!
-    var image2: UIImageView!
+    var searchImage: UIImageView!
+    var infoImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,30 +81,30 @@ class HomeVC: UIViewController {
                        notesLabel.heightAnchor.constraint(equalToConstant: 59)
                 ])
         
-                image1 = UIImageView()
+                searchImage = UIImageView()
         
-                image1.image = UIImage(named: "search")
-                image1.contentMode = .scaleAspectFit
-                image1.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(image1)
+                searchImage.image = UIImage(named: "search")
+                searchImage.contentMode = .scaleAspectFit
+                searchImage.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(searchImage)
         
-                image2 = UIImageView()
+                infoImage = UIImageView()
         
-                image2.image = UIImage(named: "info_outline")
-                image2.contentMode = .scaleAspectFit
-                image2.translatesAutoresizingMaskIntoConstraints = false
+                infoImage.image = UIImage(named: "info_outline")
+                infoImage.contentMode = .scaleAspectFit
+                infoImage.translatesAutoresizingMaskIntoConstraints = false
         
-                view.addSubview(image2)
+                view.addSubview(infoImage)
         
                 NSLayoutConstraint.activate([
-                    image1.trailingAnchor.constraint(equalTo: image2.leadingAnchor, constant: -10),
-                    image1.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                    image1.widthAnchor.constraint(equalToConstant: 30),
-                    image1.heightAnchor.constraint(equalToConstant: 30),
-                    image2.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                    image2.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                    image2.widthAnchor.constraint(equalToConstant: 30),
-                    image2.heightAnchor.constraint(equalToConstant: 30)
+                    searchImage.trailingAnchor.constraint(equalTo: infoImage.leadingAnchor, constant: -10),
+                    searchImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                    searchImage.widthAnchor.constraint(equalToConstant: 30),
+                    searchImage.heightAnchor.constraint(equalToConstant: 30),
+                    infoImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                    infoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                    infoImage.widthAnchor.constraint(equalToConstant: 30),
+                    infoImage.heightAnchor.constraint(equalToConstant: 30)
                 ])
         
     }
