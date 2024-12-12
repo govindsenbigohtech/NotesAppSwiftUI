@@ -135,7 +135,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         ])
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "popupImage") // Replace with your image
+        imageView.image = UIImage(named: "info")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(imageView)
         
@@ -178,7 +178,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         let saveButtonInAlert = UIButton()
         saveButtonInAlert.setTitle("Save", for: .normal)
         saveButtonInAlert.setTitleColor(.white, for: .normal)
-        saveButtonInAlert.backgroundColor = .green
+        saveButtonInAlert.backgroundColor = UIColor(red: 48/255, green: 190/255, blue: 113/255, alpha: 1)
         saveButtonInAlert.layer.cornerRadius = 5
         saveButtonInAlert.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(saveButtonInAlert)
@@ -282,7 +282,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         let keepButton = UIButton()
         keepButton.setTitle("Keep", for: .normal)
         keepButton.setTitleColor(.white, for: .normal)
-        keepButton.backgroundColor = .green
+        keepButton.backgroundColor = UIColor(red: 48/255, green: 190/255, blue: 113/255, alpha: 1)
         keepButton.layer.cornerRadius = 5
         keepButton.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(keepButton)
