@@ -135,7 +135,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         ])
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "info")
+        imageView.image = UIImage(named: "popupImage") // Replace with your image
         imageView.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(imageView)
         
@@ -192,8 +192,122 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
     }
-
+    
     @objc func discardButtonTapped() {
+        for subview in view.subviews {
+            if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        overlayView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(overlayView)
+        
+        NSLayoutConstraint.activate([
+            overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            overlayView.topAnchor.constraint(equalTo: view.topAnchor),
+            overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        
+        let alertView = UIView()
+        alertView.backgroundColor = .black
+        alertView.layer.cornerRadius = 10
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alertView)
+        
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            alertView.widthAnchor.constraint(equalToConstant: 300),
+            alertView.heightAnchor.constraint(equalToConstant: 250)
+        ])
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "info")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 41),
+            imageView.widthAnchor.constraint(equalToConstant: 36),
+            imageView.heightAnchor.constraint(equalToConstant: 36)
+        ])
+        
+        let label = UILabel()
+        label.text = "Are you sure you want to discard your changes?"
+        label.font = UIFont(name: "Nunito", size: 23)
+        label.textColor = .white
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 20),
+            label.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20)
+        ])
+        
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 20
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(stackView)
+        
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            stackView.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+            stackView.widthAnchor.constraint(equalToConstant: 240)
+        ])
+        
+        let discardButtonInAlert = UIButton()
+        discardButtonInAlert.setTitle("Discard", for: .normal)
+        discardButtonInAlert.setTitleColor(.white, for: .normal)
+        discardButtonInAlert.backgroundColor = .red
+        discardButtonInAlert.layer.cornerRadius = 5
+        discardButtonInAlert.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(discardButtonInAlert)
+        
+        NSLayoutConstraint.activate([
+            discardButtonInAlert.widthAnchor.constraint(equalToConstant: 100),
+            discardButtonInAlert.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        discardButtonInAlert.addTarget(self, action: #selector(discardButtonInAlertTapped), for: .touchUpInside)
+        
+        let keepButton = UIButton()
+        keepButton.setTitle("Keep", for: .normal)
+        keepButton.setTitleColor(.white, for: .normal)
+        keepButton.backgroundColor = .green
+        keepButton.layer.cornerRadius = 5
+        keepButton.translatesAutoresizingMaskIntoConstraints = false
+        stackView.addArrangedSubview(keepButton)
+        
+        NSLayoutConstraint.activate([
+            keepButton.widthAnchor.constraint(equalToConstant: 100),
+            keepButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+    }
+
+    @objc func cancelButtonTapped() {
+        for subview in view.subviews {
+            if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
+                subview.removeFromSuperview()
+            }
+        }
+        
+        saveButtonTapped()
+    }
+
+    @objc func discardButtonInAlertTapped() {
+        print("Changes discarded")
+        
+        // Remove the alert view and the overlay view
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()
