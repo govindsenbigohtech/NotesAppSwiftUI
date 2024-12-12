@@ -108,11 +108,29 @@ class HomeVC: UIViewController {
                 ])
         
     }
+    
+//    @objc func plusButtonTapped() {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let persistentContainer = appDelegate.getPersistentContainer()
+//        let coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
+//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+//        secondVC.modalPresentationStyle = .overFullScreen
+//        present(secondVC, animated: true, completion: nil)
+//    }
+    
     @objc func plusButtonTapped() {
-            let secondVC = NotesViewController()
-            secondVC.modalPresentationStyle = .fullScreen
-            present(secondVC, animated: true, completion: nil)
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let persistentContainer = appDelegate.getPersistentContainer()
+        let coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
+        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+        secondVC.modalPresentationStyle = .fullScreen
+        present(secondVC, animated: true, completion: nil)
+    }
+//    @objc func plusButtonTapped() {
+//            let secondVC = NotesViewController()
+//            secondVC.modalPresentationStyle = .fullScreen
+//            present(secondVC, animated: true, completion: nil)
+//        }
     
     class func instantiate() -> HomeVC {
         let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!

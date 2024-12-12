@@ -18,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func getPersistentContainer() -> NSPersistentContainer {
+            return persistentContainer
+       }
+    
     class func shared() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
