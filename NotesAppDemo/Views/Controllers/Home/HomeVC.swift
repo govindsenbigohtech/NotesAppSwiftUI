@@ -109,7 +109,7 @@ class HomeVC: UIViewController {
         
     }
     @objc func plusButtonTapped() {
-            let secondVC = SecondViewController()
+            let secondVC = NotesViewController()
             secondVC.modalPresentationStyle = .fullScreen
             present(secondVC, animated: true, completion: nil)
         }

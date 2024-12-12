@@ -6,7 +6,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, UITextViewDelegate {
+class NotesViewController: UIViewController, UITextViewDelegate {
     var backButton: UIButton!
     var button1: UIButton!
     var saveButton: UIButton!
