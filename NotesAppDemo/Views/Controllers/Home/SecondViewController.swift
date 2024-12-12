@@ -67,28 +67,45 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         ])
         
         let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
-        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.white]
-        
+        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+
         let titleAttributedString = NSAttributedString(string: "Title\n\n", attributes: titleAttributes)
         let bodyAttributedString = NSAttributedString(string: "Type something...", attributes: bodyAttributes)
-        
+
         let attributedText = NSMutableAttributedString()
         attributedText.append(titleAttributedString)
         attributedText.append(bodyAttributedString)
-        
+
         textField = UITextView()
         textField.attributedText = attributedText
         textField.backgroundColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
-        
+
         view.addSubview(textField)
         
-        NSLayoutConstraint.activate([
-            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 141),
-            textField.widthAnchor.constraint(equalToConstant: 100),
-            textField.heightAnchor.constraint(equalToConstant: 52)
-        ])
+//        let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+//        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.white]
+//        
+//        let titleAttributedString = NSAttributedString(string: "Title\n\n", attributes: titleAttributes)
+//        let bodyAttributedString = NSAttributedString(string: "Type something...", attributes: bodyAttributes)
+//        
+//        let attributedText = NSMutableAttributedString()
+//        attributedText.append(titleAttributedString)
+//        attributedText.append(bodyAttributedString)
+//        
+//        textField = UITextView()
+//        textField.attributedText = attributedText
+//        textField.backgroundColor = .black
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        view.addSubview(textField)
+//        
+//        NSLayoutConstraint.activate([
+//            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+//            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 141),
+//            textField.widthAnchor.constraint(equalToConstant: 100),
+//            textField.heightAnchor.constraint(equalToConstant: 52)
+//        ])
         
 //        textField = UITextView()
 //        
