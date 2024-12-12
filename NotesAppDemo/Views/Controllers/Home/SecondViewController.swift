@@ -106,9 +106,11 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         ])
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
     }
     
     @objc func saveButtonTapped() {
+        view.endEditing(true)
         let overlayView = UIView()
         overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         overlayView.translatesAutoresizingMaskIntoConstraints = false
@@ -191,6 +193,10 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         ])
         
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
+    }
+    
+    @objc func button1Tapped() {
+        view.endEditing(true)
     }
     
     @objc func discardButtonTapped() {
@@ -358,7 +364,9 @@ class SecondViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func backButtonTapped() {
+        view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
