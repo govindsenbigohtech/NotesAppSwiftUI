@@ -7,6 +7,8 @@
 import UIKit
 
 class NotesViewController: UIViewController, UITextViewDelegate {
+    
+    
     var backButton: UIButton!
     var button1: UIButton!
     var saveButton: UIButton!
@@ -16,7 +18,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
     }
     
@@ -27,7 +28,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         backButton.setTitleColor(.label, for: .normal)
         backButton.backgroundColor = .clear
         backButton.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
@@ -45,16 +45,13 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         button1.setTitleColor(.label, for: .normal)
         button1.backgroundColor = .clear
         button1.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(button1)
         
         saveButton = UIButton()
-        
         saveButton.setImage(UIImage(named: "save"), for: .normal)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.backgroundColor = .clear
         saveButton.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
@@ -68,6 +65,9 @@ class NotesViewController: UIViewController, UITextViewDelegate {
             saveButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+        button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
+        
         let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
         let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
         
@@ -78,7 +78,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         titleTextField.backgroundColor = .black
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.delegate = self
-        
         view.addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
@@ -105,8 +104,7 @@ class NotesViewController: UIViewController, UITextViewDelegate {
             bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-        button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
+        
     }
     
     @objc func saveButtonTapped() {
@@ -299,7 +297,7 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         ])
         
     }
-
+    
     @objc func cancelButtonTapped() {
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
@@ -309,7 +307,7 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         
         saveButtonTapped()
     }
-
+    
     @objc func discardButtonInAlertTapped() {
         print("Changes discarded")
         
@@ -320,7 +318,7 @@ class NotesViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-
+    
     @objc func saveButtonInAlertTapped() {
         print("Changes saved")
         
