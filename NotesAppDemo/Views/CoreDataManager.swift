@@ -9,16 +9,16 @@ import CoreData
 
 class CoreDataManager {
     let persistentContainer: NSPersistentContainer
-
+    
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-
+    
     func saveNote(title: String, body: String) {
         let note = Note(context: persistentContainer.viewContext)
         note.title = title
         note.body = body
-
+        
         do {
             try persistentContainer.viewContext.save()
         } catch {

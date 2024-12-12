@@ -9,33 +9,33 @@ import UIKit
 import CoreData
 
 class NotesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     let tableView = UITableView()
     var notes: [Note] = []
     let coreDataManager: CoreDataManager
-
+    
     init(coreDataManager: CoreDataManager) {
         self.coreDataManager = coreDataManager
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         fetchNotes()
     }
-
+    
     func setupUI() {
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -43,7 +43,7 @@ class NotesTableViewController: UIViewController, UITableViewDataSource, UITable
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
     func fetchNotes() {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
@@ -53,17 +53,17 @@ class NotesTableViewController: UIViewController, UITableViewDataSource, UITable
             print("Error fetching notes: \(error)")
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
         cell.configureCell(note: notes[indexPath.row])
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Handle cell selection
     }
