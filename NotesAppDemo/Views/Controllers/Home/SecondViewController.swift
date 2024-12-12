@@ -23,7 +23,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
 
         backButton.setTitleColor(.label, for: .normal)
-        backButton.backgroundColor = .label
+        backButton.backgroundColor = .clear
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(backButton)
@@ -38,7 +38,6 @@ class SecondViewController: UIViewController, UITextViewDelegate {
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
         button1 = UIButton()
-        
 
         button1.setImage(UIImage(named: "eyeImg"), for: .normal)
         button1.setTitleColor(.label, for: .normal)
@@ -67,15 +66,39 @@ class SecondViewController: UIViewController, UITextViewDelegate {
             button2.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-        textField = UITextView()
+        let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 17), .foregroundColor: UIColor.white]
         
-        textField.backgroundColor = .label
-        textField.font = .systemFont(ofSize: 17)
-        textField.text = "Title\n\nType something..."
-        textField.textColor = .lightGray
+        let titleAttributedString = NSAttributedString(string: "Title\n\n", attributes: titleAttributes)
+        let bodyAttributedString = NSAttributedString(string: "Type something...", attributes: bodyAttributes)
+        
+        let attributedText = NSMutableAttributedString()
+        attributedText.append(titleAttributedString)
+        attributedText.append(bodyAttributedString)
+        
+        textField = UITextView()
+        textField.attributedText = attributedText
+        textField.backgroundColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(textField)
+        
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            textField.topAnchor.constraint(equalTo: view.topAnchor, constant: 141),
+            textField.widthAnchor.constraint(equalToConstant: 100),
+            textField.heightAnchor.constraint(equalToConstant: 52)
+        ])
+        
+//        textField = UITextView()
+//        
+//        textField.backgroundColor = .label
+//        textField.font = .systemFont(ofSize: 17)
+//        textField.text = "Title\n\nType something..."
+//        textField.textColor = .lightGray
+//        textField.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        view.addSubview(textField)
         
         NSLayoutConstraint.activate([
             textField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -90,7 +113,7 @@ class SecondViewController: UIViewController, UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Title\n\nType something..." {
             textView.text = ""
-            textView.textColor = .black
+            textView.textColor = .white
         }
     }
     

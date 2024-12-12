@@ -36,13 +36,26 @@ class HomeVC: UIViewController {
             notesImageView.widthAnchor.constraint(equalToConstant: 350),
             notesImageView.heightAnchor.constraint(equalToConstant: 280)
         ])
+        
+        let noteLabel = UILabel()
+           noteLabel.text = "Create your first note !"
+           noteLabel.font = UIFont(name: "Nunito-Regular", size: 20)
+           noteLabel.textAlignment = .center
+           noteLabel.translatesAutoresizingMaskIntoConstraints = false
+       
+           view.addSubview(noteLabel)
+       
+           NSLayoutConstraint.activate([
+               noteLabel.centerXAnchor.constraint(equalTo: notesImageView.centerXAnchor),
+               noteLabel.topAnchor.constraint(equalTo: notesImageView.bottomAnchor, constant: 5),
+               noteLabel.widthAnchor.constraint(equalToConstant: 250)
+           ])
         addButton = UIButton()
         
-//              addButton.setTitle("+", for: .normal)
         addButton.setImage(UIImage(named: "add"), for: .normal)
 
         addButton.setTitleColor(.label, for: .normal)
-        addButton.backgroundColor = .label
+        addButton.backgroundColor = .clear
                addButton.layer.cornerRadius = 35
                addButton.translatesAutoresizingMaskIntoConstraints = false
                view.addSubview(addButton)
