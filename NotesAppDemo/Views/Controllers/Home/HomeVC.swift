@@ -18,13 +18,6 @@ class HomeVC: UIViewController{
     var coreDataManager: CoreDataManager!
     
     var notes: [Note] = []
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        self.setupUI()
-//        self.setupTableView()
-//        addButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,39 +139,9 @@ class HomeVC: UIViewController{
         }
     }
     
-//    private func fetchNotes() {
-//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-//        do {
-//            notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-//            tableView.reloadData() // Reload the table view after fetching notes
-//        } catch {
-//            print("Error fetching notes: \(error)")
-//        }
-//    }
-
-//    private func fetchNotes() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let persistentContainer = appDelegate.getPersistentContainer()
-//        coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
-//
-//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-//        do {
-//            let notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-//        } catch {
-//            print("Error fetching notes: \(error)")
-//        }
-//    }
-
-//    @objc func plusButtonTapped() {
-//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
-//        secondVC.modalPresentationStyle = .fullScreen
-//        present(secondVC, animated: true, completion: nil)
-//    }
-    
     @objc func plusButtonTapped() {
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
         secondVC.onSave = { [weak self] title, body in
-            // Reload the table view with the new note
             self?.fetchNotes()
             self?.tableView.reloadData()
         }
@@ -203,24 +166,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         cell.configureCell(note: notes[indexPath.row])
         return cell
     }
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//                let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-//                do {
-//                    let notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-//                    return notes.count
-//                } catch {
-//                    print("Error fetching notes: \(error)")
-//                    return 0
-//                }
-//        return notes.count
-//        
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
-//        cell.configureCell(note: notes[indexPath.row])
-//        return cell
-//    }
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
