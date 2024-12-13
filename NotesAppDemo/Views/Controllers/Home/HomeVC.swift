@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class HomeVC: UIViewController{
+class HomeVC: UIViewController {
     var notesImageView: UIImageView!
     var addButton: UIButton!
     var notesLabel: UILabel!

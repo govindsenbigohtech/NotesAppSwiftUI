@@ -23,12 +23,12 @@ class NoteTableViewCell: UITableViewCell {
     
     func setupUI() {
         titleLabel.font = UIFont(name: "Nunito", size: 23)
-        titleLabel.textColor = .black // Set text color to white
+        titleLabel.textColor = .black
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(titleLabel)
         
         bodyLabel.font = UIFont(name: "Nunito", size: 18)
-        bodyLabel.textColor = .black // Set text color to white
+        bodyLabel.textColor = .black
         bodyLabel.numberOfLines = 0
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(bodyLabel)
