@@ -18,6 +18,7 @@ class HomeVC: UIViewController {
     var coreDataManager: CoreDataManager!
     
     var notes: [Note] = []
+    var placeholderView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,31 +35,7 @@ class HomeVC: UIViewController {
     }
 
     private func setupUI() {
-        notesImageView = UIImageView()
-        notesImageView.image = UIImage(named: "notesImg")
-        notesImageView.contentMode = .scaleAspectFit
-        notesImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(notesImageView)
-
-        NSLayoutConstraint.activate([
-            notesImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            notesImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            notesImageView.widthAnchor.constraint(equalToConstant: 350),
-            notesImageView.heightAnchor.constraint(equalToConstant: 280)
-        ])
-
-        let noteLabel = UILabel()
-        noteLabel.text = "Create your first note !"
-        noteLabel.font = UIFont(name: "Nunito-Regular", size: 20)
-        noteLabel.textAlignment = .center
-        noteLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(noteLabel)
-
-        NSLayoutConstraint.activate([
-            noteLabel.centerXAnchor.constraint(equalTo: notesImageView.centerXAnchor),
-            noteLabel.topAnchor.constraint(equalTo: notesImageView.bottomAnchor, constant: 5),
-            noteLabel.widthAnchor.constraint(equalToConstant: 250)
-        ])
+        self.setupImageForPlaceholder()
 
         addButton = UIButton()
         addButton.setImage(UIImage(named: "add"), for: .normal)
@@ -111,7 +88,47 @@ class HomeVC: UIViewController {
             infoImage.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
+    
+    private func setupImageForPlaceholder() {
+        // Create and configure the placeholder view
+         placeholderView = UIView()
+         placeholderView.translatesAutoresizingMaskIntoConstraints = false
+         view.addSubview(placeholderView)
 
+         let placeholderImageView = UIImageView()
+         placeholderImageView.image = UIImage(named: "notesImg")
+         placeholderImageView.contentMode = .scaleAspectFit
+         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
+         placeholderView.addSubview(placeholderImageView)
+
+         let placeholderLabel = UILabel()
+         placeholderLabel.text = "Create your first note!"
+         placeholderLabel.font = UIFont(name: "Nunito-Regular", size: 20)
+         placeholderLabel.textAlignment = .center
+         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+         placeholderView.addSubview(placeholderLabel)
+
+         // Set up constraints for the placeholder view
+         NSLayoutConstraint.activate([
+             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+             placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+             placeholderView.widthAnchor.constraint(equalToConstant: 350),
+             placeholderView.heightAnchor.constraint(equalToConstant: 280),
+
+             placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+             placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
+             placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+             placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
+
+             placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+             placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
+             placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+         ])
+
+         // Initially hide the placeholder view
+         placeholderView.isHidden = true
+    }
+    
     private func setupTableView() {
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
@@ -126,18 +143,50 @@ class HomeVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
         ])
 
-        fetchNotes()
+        // Initially hide the table view
+        tableView.isHidden = true
     }
+
+//    private func setupTableView() {
+//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(tableView)
+//
+//        NSLayoutConstraint.activate([
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 20),
+//            tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
+//        ])
+//
+//        fetchNotes()
+//    }
     
     private func fetchNotes() {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
             notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
             tableView.reloadData() // Reload the table view after fetching notes
+            
+            // Show or hide the placeholder view based on the notes count
+            placeholderView.isHidden = !notes.isEmpty
+            tableView.isHidden = notes.isEmpty // Hide the table view if there are no notes
         } catch {
             print("Error fetching notes: \(error)")
         }
     }
+    
+//    private func fetchNotes() {
+//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+//        do {
+//            notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
+//            tableView.reloadData() // Reload the table view after fetching notes
+//        } catch {
+//            print("Error fetching notes: \(error)")
+//        }
+//    }
     
     @objc func plusButtonTapped() {
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
