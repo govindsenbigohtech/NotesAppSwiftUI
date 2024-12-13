@@ -65,7 +65,7 @@ class NotesViewController: UIViewController {
         
         saveButton = UIButton()
         saveButton.setImage(UIImage(named: "save"), for: .normal)
-        saveButton.setTitleColor(.white, for: .normal)
+        saveButton.setTitleColor(.background, for: .normal)
         saveButton.backgroundColor = .clear
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(saveButton)
@@ -140,7 +140,7 @@ class NotesViewController: UIViewController {
         ])
         
         let alertView = UIView()
-        alertView.backgroundColor = .black
+        alertView.backgroundColor = .appGray
         alertView.layer.cornerRadius = 10
         alertView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alertView)
@@ -168,7 +168,7 @@ class NotesViewController: UIViewController {
         label.text = "Save changes?"
 //        label.font = UIFont(name: "Nunito", size: 23)
         label.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
-        label.textColor = .white
+        label.textColor = .background
         label.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(label)
         
@@ -179,8 +179,8 @@ class NotesViewController: UIViewController {
         
         let discardButton = UIButton()
         discardButton.setTitle("Discard", for: .normal)
-        discardButton.setTitleColor(.white, for: .normal)
-        discardButton.backgroundColor = .red
+        discardButton.setTitleColor(.background, for: .normal)
+        discardButton.backgroundColor = .appRed
         discardButton.layer.cornerRadius = 5
         discardButton.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(discardButton)
@@ -194,8 +194,8 @@ class NotesViewController: UIViewController {
         
         let saveButtonInAlert = UIButton()
         saveButtonInAlert.setTitle("Save", for: .normal)
-        saveButtonInAlert.setTitleColor(.white, for: .normal)
-        saveButtonInAlert.backgroundColor = UIColor(red: 48/255, green: 190/255, blue: 113/255, alpha: 1)
+        saveButtonInAlert.setTitleColor(.background, for: .normal)
+        saveButtonInAlert.backgroundColor = .appRed
         saveButtonInAlert.layer.cornerRadius = 5
         saveButtonInAlert.translatesAutoresizingMaskIntoConstraints = false
                 alertView.addSubview(saveButtonInAlert)
@@ -224,7 +224,7 @@ class NotesViewController: UIViewController {
         onSave?(title, body)
         
         for subview in view.subviews {
-            if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
+            if subview.backgroundColor == .appGray || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()
             }
         }
@@ -244,12 +244,12 @@ extension NotesViewController: UITextViewDelegate {
         if textView == titleTextField {
             if textView.text == "Title" {
                 textView.text = ""
-                textView.textColor = .white
+                textView.textColor = .background
             }
         } else if textView == bodyTextField {
             if textView.text == "Type something..." {
                 textView.text = ""
-                textView.textColor = .white
+                textView.textColor = .background
             }
         }
     }
@@ -258,12 +258,12 @@ extension NotesViewController: UITextViewDelegate {
         if textView == titleTextField {
             if textView.text.isEmpty {
                 textView.text = "Title"
-                textView.textColor = .lightGray
+                textView.textColor = .appLightGray
             }
         } else if textView == bodyTextField {
             if textView.text.isEmpty {
                 textView.text = "Type something..."
-                textView.textColor = .lightGray
+                textView.textColor = .appLightGray
             }
         }
     }

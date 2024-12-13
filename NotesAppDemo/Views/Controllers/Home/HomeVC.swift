@@ -224,7 +224,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             completionHandler(true)
         }
         
-        deleteAction.backgroundColor = .red
+        deleteAction.backgroundColor = .appRed
         
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration

@@ -28,13 +28,13 @@ class NoteTableViewCell: UITableViewCell {
         
 //        titleLabel.font = UIFont(name: "Nunito", size: 23)
         titleLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
-        titleLabel.textColor = .black
+        titleLabel.textColor = .appGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         
 //        bodyLabel.font = UIFont(name: "Nunito", size: 18)
         bodyLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
-        bodyLabel.textColor = .black
+        bodyLabel.textColor = .appGray
         bodyLabel.numberOfLines = 0
         bodyLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(bodyLabel)
@@ -61,7 +61,7 @@ class NoteTableViewCell: UITableViewCell {
         
         containerView.layer.cornerRadius = 10
         containerView.layer.masksToBounds = true
-        containerView.backgroundColor = .white
+        containerView.backgroundColor = .background
     }
     
     func configureCell(note: Note) {
