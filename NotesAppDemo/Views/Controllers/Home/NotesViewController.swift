@@ -197,6 +197,15 @@ class NotesViewController: UIViewController {
         ])
         
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
+        discardButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+    }
+    
+    
+   
+
+    
+    @objc func dismissView() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func saveButtonInAlertTapped() {
