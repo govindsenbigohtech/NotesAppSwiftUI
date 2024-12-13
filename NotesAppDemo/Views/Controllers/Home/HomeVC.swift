@@ -146,23 +146,6 @@ class HomeVC: UIViewController {
         // Initially hide the table view
         tableView.isHidden = true
     }
-
-//    private func setupTableView() {
-//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(tableView)
-//
-//        NSLayoutConstraint.activate([
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 20),
-//            tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
-//        ])
-//
-//        fetchNotes()
-//    }
     
     private func fetchNotes() {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
@@ -177,16 +160,6 @@ class HomeVC: UIViewController {
             print("Error fetching notes: \(error)")
         }
     }
-    
-//    private func fetchNotes() {
-//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-//        do {
-//            notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-//            tableView.reloadData() // Reload the table view after fetching notes
-//        } catch {
-//            print("Error fetching notes: \(error)")
-//        }
-//    }
     
     @objc func plusButtonTapped() {
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
@@ -222,18 +195,40 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-           let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-               // Remove the note from your data source
-               self.notes.remove(at: indexPath.row)
-               // Delete the row from the table view
-               tableView.deleteRows(at: [indexPath], with: .automatic)
-               completionHandler(true)
-           }
-           
-           // Optionally customize the action appearance
-           deleteAction.backgroundColor = .red
-           
-           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-           return configuration
-       }
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+            let noteToDelete = self.notes[indexPath.row]
+            
+            self.coreDataManager.delete(note: noteToDelete)
+            
+            self.notes.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            self.placeholderView.isHidden = !self.notes.isEmpty
+            tableView.isHidden = self.notes.isEmpty
+            
+            completionHandler(true)
+        }
+        
+        deleteAction.backgroundColor = .red
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        return configuration
+    }
+    
+    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //           let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
+    //               // Remove the note from your data source
+    //               self.notes.remove(at: indexPath.row)
+    //               // Delete the row from the table view
+    //               tableView.deleteRows(at: [indexPath], with: .automatic)
+    //               completionHandler(true)
+    //           }
+    //
+    //           // Optionally customize the action appearance
+    //           deleteAction.backgroundColor = .red
+    //
+    //           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+    //           return configuration
+    //       }
 }

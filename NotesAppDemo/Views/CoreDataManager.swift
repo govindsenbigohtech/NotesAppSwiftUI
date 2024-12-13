@@ -9,32 +9,64 @@ import CoreData
 
 class CoreDataManager {
     let persistentContainer: NSPersistentContainer
-    
+
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-    
+
     func saveNote(title: String, body: String) {
-        let note = Note(context: persistentContainer.viewContext)
+        let context = persistentContainer.viewContext
+        let note = Note(context: context)
         note.title = title
         note.body = body
-        
+
         do {
-            try persistentContainer.viewContext.save()
+            try context.save()
         } catch {
-            print("Error saving note: \(error)")
+            print("Failed to save note: \(error)")
         }
     }
-    
-//    func fetchAllNotes() {
-//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+
+    func delete(note: Note) {
+        let context = persistentContainer.viewContext
+        context.delete(note)
+
+        do {
+            try context.save()
+        } catch {
+            print("Failed to delete note: \(error)")
+        }
+    }
+}
+
+//class CoreDataManager {
+//    let persistentContainer: NSPersistentContainer
+//    
+//    init(persistentContainer: NSPersistentContainer) {
+//        self.persistentContainer = persistentContainer
+//    }
+//    
+//    func saveNote(title: String, body: String) {
+//        let note = Note(context: persistentContainer.viewContext)
+//        note.title = title
+//        note.body = body
+//        
 //        do {
-//            let notes = try persistentContainer.viewContext.fetch(fetchRequest)
-//            for note in notes {
-//                print("Title: \(note.title!), Body: \(note.body!)")
-//            }
+//            try persistentContainer.viewContext.save()
 //        } catch {
-//            print("Error fetching notes: \(error)")
+//            print("Error saving note: \(error)")
 //        }
 //    }
-}
+//    
+////    func fetchAllNotes() {
+////        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+////        do {
+////            let notes = try persistentContainer.viewContext.fetch(fetchRequest)
+////            for note in notes {
+////                print("Title: \(note.title!), Body: \(note.body!)")
+////            }
+////        } catch {
+////            print("Error fetching notes: \(error)")
+////        }
+////    }
+//}
