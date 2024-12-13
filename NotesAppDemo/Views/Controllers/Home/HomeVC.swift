@@ -68,6 +68,9 @@ class HomeVC: UIViewController {
                 searchButton.setImage(UIImage(named: "search"), for: .normal)
                 searchButton.contentMode = .scaleAspectFit
                 searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.backgroundColor = .appGray
+        searchButton.layer.cornerRadius = 15
+            searchButton.layer.masksToBounds = true
                 view.addSubview(searchButton)
 
         
@@ -75,17 +78,21 @@ class HomeVC: UIViewController {
                 infoButton.setImage(UIImage(named: "info_outline"), for: .normal)
                 infoButton.contentMode = .scaleAspectFit
                 infoButton.translatesAutoresizingMaskIntoConstraints = false
+        infoButton.backgroundColor = .appGray
+        infoButton.layer.cornerRadius = 15
+            infoButton.layer.masksToBounds = true
                view.addSubview(infoButton)
 
         NSLayoutConstraint.activate([
             searchButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -10),
                        searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                       searchButton.widthAnchor.constraint(equalToConstant: 30),
-                       searchButton.heightAnchor.constraint(equalToConstant: 30),
+                       searchButton.widthAnchor.constraint(equalToConstant: 50),
+                       searchButton.heightAnchor.constraint(equalToConstant: 50),
+            
             infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
                         infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                        infoButton.widthAnchor.constraint(equalToConstant: 30),
-                        infoButton.heightAnchor.constraint(equalToConstant: 30)
+                        infoButton.widthAnchor.constraint(equalToConstant: 50),
+                        infoButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
