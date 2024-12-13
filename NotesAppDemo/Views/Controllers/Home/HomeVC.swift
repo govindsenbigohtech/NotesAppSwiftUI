@@ -215,20 +215,4 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
         return configuration
     }
-    
-    //    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-    //           let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-    //               // Remove the note from your data source
-    //               self.notes.remove(at: indexPath.row)
-    //               // Delete the row from the table view
-    //               tableView.deleteRows(at: [indexPath], with: .automatic)
-    //               completionHandler(true)
-    //           }
-    //
-    //           // Optionally customize the action appearance
-    //           deleteAction.backgroundColor = .red
-    //
-    //           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-    //           return configuration
-    //       }
 }

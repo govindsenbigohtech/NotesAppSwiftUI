@@ -262,7 +262,6 @@ extension NotesViewController: UITextViewDelegate {
         }
         return true
     }
-    // This is my code, I want when my tableview cell is deleted, then it should also get updated on my core data, so that when I relaunch application, then deleted cell should not gets visibly again.
     
     func textViewDidChange(_ textView: UITextView) {
         if textView.text.count > 0 {
