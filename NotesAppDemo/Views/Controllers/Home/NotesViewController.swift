@@ -256,8 +256,6 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
         
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
         coreDataManager.saveNote(title: titleTextField.text, body: bodyTextField.text)
-        
-        coreDataManager.saveNote(title: titleTextField.text, body: bodyTextField.text)
         coreDataManager.fetchAllNotes()
         checkNotes()
         
