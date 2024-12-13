@@ -83,13 +83,17 @@ class NotesViewController: UIViewController {
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         
-        let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
-        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+//        let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+//        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+        
+        let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.font(family: .nunito, sizeFamily: .regular, size: 48), .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
+        let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont.font(family: .nunito, sizeFamily: .regular, size: 23), .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
         
         titleTextField = UITextView()
         titleTextField.text = "Title"
         titleTextField.textColor = .white
-        titleTextField.font = UIFont(name: "Nunito", size: 48)
+//        titleTextField.font = UIFont(name: "Nunito", size: 48)
+        titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
         titleTextField.backgroundColor = .black
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.delegate = self
@@ -105,7 +109,8 @@ class NotesViewController: UIViewController {
         bodyTextField = UITextView()
         bodyTextField.text = "Type something..."
         bodyTextField.textColor = .white
-        bodyTextField.font = UIFont(name: "Nunito", size: 23)
+//        bodyTextField.font = UIFont(name: "Nunito", size: 23)
+        bodyTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
         bodyTextField.backgroundColor = .black
         bodyTextField.translatesAutoresizingMaskIntoConstraints = false
         bodyTextField.delegate = self
@@ -161,7 +166,8 @@ class NotesViewController: UIViewController {
         
         let label = UILabel()
         label.text = "Save changes?"
-        label.font = UIFont(name: "Nunito", size: 23)
+//        label.font = UIFont(name: "Nunito", size: 23)
+        label.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(label)
