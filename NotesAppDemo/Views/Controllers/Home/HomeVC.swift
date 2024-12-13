@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeVC: UIViewController{
     var notesImageView: UIImageView!
     var addButton: UIButton!
     var notesLabel: UILabel!
@@ -19,13 +19,12 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
-        setupTableView()
+        self.setupUI()
+        self.setupTableView()
         addButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
     }
 
     private func setupUI() {
-        // Existing UI setup code...
         notesImageView = UIImageView()
         notesImageView.image = UIImage(named: "notesImg")
         notesImageView.contentMode = .scaleAspectFit
@@ -129,7 +128,6 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
             let notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-            // Handle the fetched notes as needed, e.g., store them in an array to display in the table view
         } catch {
             print("Error fetching notes: \(error)")
         }
@@ -141,10 +139,17 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         present(secondVC, animated: true, completion: nil)
     }
 
-    // MARK: - UITableViewDataSource Methods
+
+    class func instantiate() -> HomeVC {
+        let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
+        return vc
+    }
+}
+
+extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+    
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the number of notes fetched from Core Data
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
             let notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
@@ -167,14 +172,8 @@ class HomeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-    // MARK: - UITableViewDelegate Methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Handle note selection if needed
-    }
-
-    class func instantiate() -> HomeVC {
-        let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
-        return vc
     }
 }

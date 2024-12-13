@@ -7,7 +7,7 @@
 import UIKit
 import CoreData
 
-class NotesViewController: UIViewController, UITextViewDelegate {
+class NotesViewController: UIViewController {
     
     var backButton: UIButton!
     var button1: UIButton!
@@ -77,7 +77,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         ])
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
-//        button1.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
         
         let titleAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 48)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
         let bodyAttributes: [NSAttributedString.Key: Any] = [.font: UIFont(name: "Nunito", size: 23)!, .foregroundColor: UIColor(red: 154/255, green: 154/255, blue: 154/255, alpha: 1)]
@@ -182,8 +181,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
             discardButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-//        discardButton.addTarget(self, action: #selector(discardButtonTapped), for: .touchUpInside)
-        
         let saveButtonInAlert = UIButton()
         saveButtonInAlert.setTitle("Save", for: .normal)
         saveButtonInAlert.setTitleColor(.white, for: .normal)
@@ -203,23 +200,19 @@ class NotesViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func saveButtonInAlertTapped() {
-        // Save the note to Core Data
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         
         coreDataManager.saveNote(title: title, body: body)
         
-        // Call the closure to notify HomeVC
         onSave?(title, body)
         
-        // Remove overlay and alert view
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()
             }
         }
         
-        // Optionally, dismiss the view controller after saving
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -227,8 +220,10 @@ class NotesViewController: UIViewController, UITextViewDelegate {
         view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
     }
+}
+
+extension NotesViewController: UITextViewDelegate {
     
-    // UITextViewDelegate Methods
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == titleTextField {
             if textView.text == "Title" {
@@ -260,7 +255,6 @@ class NotesViewController: UIViewController, UITextViewDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             textView.resignFirstResponder()
