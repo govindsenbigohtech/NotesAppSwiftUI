@@ -217,7 +217,6 @@ class NotesViewController: UIViewController {
         
         onSave?(title, body)
         
-        // Dismiss the alert and the view controller
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()

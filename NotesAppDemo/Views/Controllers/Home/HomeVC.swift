@@ -12,8 +12,8 @@ class HomeVC: UIViewController {
     var notesImageView: UIImageView!
     var addButton: UIButton!
     var notesLabel: UILabel!
-    var searchImage: UIImageView!
-    var infoImage: UIImageView!
+    var searchButton: UIButton!
+    var infoButton: UIButton!
     let tableView = UITableView()
     var coreDataManager: CoreDataManager!
     
@@ -53,7 +53,7 @@ class HomeVC: UIViewController {
 
         notesLabel = UILabel()
         notesLabel.text = "Notes"
-        notesLabel.font = UIFont(name: "Nunito-Regular", size: 43)
+        notesLabel.font = UIFont(name: "Nunito-SemiBold", size: 43)
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(notesLabel)
 
@@ -63,28 +63,29 @@ class HomeVC: UIViewController {
             notesLabel.widthAnchor.constraint(equalToConstant: 115),
             notesLabel.heightAnchor.constraint(equalToConstant: 59)
         ])
+        
+        searchButton = UIButton()
+                searchButton.setImage(UIImage(named: "search"), for: .normal)
+                searchButton.contentMode = .scaleAspectFit
+                searchButton.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(searchButton)
 
-        searchImage = UIImageView()
-        searchImage.image = UIImage(named: "search")
-        searchImage.contentMode = .scaleAspectFit
-        searchImage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(searchImage)
-
-        infoImage = UIImageView()
-        infoImage.image = UIImage(named: "info_outline")
-        infoImage.contentMode = .scaleAspectFit
-        infoImage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(infoImage)
+        
+        infoButton = UIButton()
+                infoButton.setImage(UIImage(named: "info_outline"), for: .normal)
+                infoButton.contentMode = .scaleAspectFit
+                infoButton.translatesAutoresizingMaskIntoConstraints = false
+               view.addSubview(infoButton)
 
         NSLayoutConstraint.activate([
-            searchImage.trailingAnchor.constraint(equalTo: infoImage.leadingAnchor, constant: -10),
-            searchImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            searchImage.widthAnchor.constraint(equalToConstant: 30),
-            searchImage.heightAnchor.constraint(equalToConstant: 30),
-            infoImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            infoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            infoImage.widthAnchor.constraint(equalToConstant: 30),
-            infoImage.heightAnchor.constraint(equalToConstant: 30)
+            searchButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -10),
+                       searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                       searchButton.widthAnchor.constraint(equalToConstant: 30),
+                       searchButton.heightAnchor.constraint(equalToConstant: 30),
+            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+                        infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                        infoButton.widthAnchor.constraint(equalToConstant: 30),
+                        infoButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -107,7 +108,6 @@ class HomeVC: UIViewController {
          placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
          placeholderView.addSubview(placeholderLabel)
 
-         // Set up constraints for the placeholder view
          NSLayoutConstraint.activate([
              placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
              placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -124,7 +124,6 @@ class HomeVC: UIViewController {
              placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
          ])
 
-         // Initially hide the placeholder view
          placeholderView.isHidden = true
     }
     
@@ -142,7 +141,6 @@ class HomeVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
         ])
 
-        // Initially hide the table view
         tableView.isHidden = true
     }
     
