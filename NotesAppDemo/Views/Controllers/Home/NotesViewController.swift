@@ -199,14 +199,33 @@ class NotesViewController: UIViewController {
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
     }
     
+//    @objc func saveButtonInAlertTapped() {
+//        let title = titleTextField.text ?? ""
+//        let body = bodyTextField.text ?? ""
+//        
+//        coreDataManager.saveNote(title: title, body: body)
+//        
+//        onSave?(title, body)
+//        
+//        for subview in view.subviews {
+//            if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
+//                subview.removeFromSuperview()
+//            }
+//        }
+//        
+//        self.dismiss(animated: true, completion: nil)
+//    }
+    
     @objc func saveButtonInAlertTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         
         coreDataManager.saveNote(title: title, body: body)
         
+        // Notify the HomeVC that a note has been saved
         onSave?(title, body)
         
+        // Dismiss the alert and the view controller
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()

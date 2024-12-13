@@ -26,15 +26,15 @@ class CoreDataManager {
         }
     }
     
-    func fetchAllNotes() {
-        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-        do {
-            let notes = try persistentContainer.viewContext.fetch(fetchRequest)
-            for note in notes {
-                print("Title: \(note.title!), Body: \(note.body!)")
-            }
-        } catch {
-            print("Error fetching notes: \(error)")
-        }
-    }
+//    func fetchAllNotes() {
+//        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
+//        do {
+//            let notes = try persistentContainer.viewContext.fetch(fetchRequest)
+//            for note in notes {
+//                print("Title: \(note.title!), Body: \(note.body!)")
+//            }
+//        } catch {
+//            print("Error fetching notes: \(error)")
+//        }
+//    }
 }
