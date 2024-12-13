@@ -42,16 +42,11 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
-//            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let persistentContainer = appDelegate.getPersistentContainer()
         coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
         checkNotes()
-        //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //               let persistentContainer = appDelegate.getPersistentContainer()
-        //                coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
-        //
     }
     
     func checkNotes() {
@@ -71,14 +66,12 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
     }
     
     func setupUIForEmptyNotes() {
-        // Hide table view and display text fields
         tableView.isHidden = true
         titleTextField.isHidden = false
         bodyTextField.isHidden = false
     }
     
     func setupUIForNotes() {
-        // Hide text fields and display table view
         tableView.isHidden = false
         titleTextField.isHidden = true
         bodyTextField.isHidden = true
@@ -378,8 +371,6 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
     
     @objc func discardButtonInAlertTapped() {
         print("Changes discarded")
-        
-        // Remove the alert view and the overlay view
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()
@@ -432,15 +423,9 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
     @objc func backButtonTapped() {
         view.endEditing(true)
         self.dismiss(animated: true, completion: nil)
-//        let notesTableViewController = NotesTableViewController(coreDataManager: coreDataManager)
-//        self.present(notesTableViewController, animated: true, completion: nil)
     }
     
-    //    @objc func backButtonTapped() {
-    //        view.endEditing(true)
-    //        self.dismiss(animated: true, completion: nil)
-    //
-    //    }
+    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
