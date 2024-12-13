@@ -41,7 +41,8 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 20),
+//            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)])
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let persistentContainer = appDelegate.getPersistentContainer()
@@ -432,8 +433,9 @@ class NotesViewController: UIViewController, UITextViewDelegate, UITableViewDele
     
     @objc func backButtonTapped() {
         view.endEditing(true)
-        let notesTableViewController = NotesTableViewController(coreDataManager: coreDataManager)
-        self.present(notesTableViewController, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+//        let notesTableViewController = NotesTableViewController(coreDataManager: coreDataManager)
+//        self.present(notesTableViewController, animated: true, completion: nil)
     }
     
     //    @objc func backButtonTapped() {
