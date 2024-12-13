@@ -17,6 +17,7 @@ class NotesViewController: UIViewController {
     
     var coreDataManager: CoreDataManager
     var onSave: ((String, String) -> Void)?
+    var noteToEdit: Note?
     
     init(coreDataManager: CoreDataManager) {
         self.coreDataManager = coreDataManager
@@ -30,6 +31,10 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        if let note = noteToEdit {
+                    titleTextField.text = note.title
+                    bodyTextField.text = note.body
+                }
     }
     
     private func setupUI() {
@@ -200,10 +205,6 @@ class NotesViewController: UIViewController {
         discardButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
     
-    
-   
-
-    
     @objc func dismissView() {
         self.dismiss(animated: true, completion: nil)
     }
@@ -212,10 +213,11 @@ class NotesViewController: UIViewController {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         
-        coreDataManager.saveNote(title: title, body: body)
+        coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
         
         onSave?(title, body)
         
+        // Dismiss the alert and the view controller
         for subview in view.subviews {
             if subview.backgroundColor == .black || subview.backgroundColor?.cgColor.alpha == 0.5 {
                 subview.removeFromSuperview()

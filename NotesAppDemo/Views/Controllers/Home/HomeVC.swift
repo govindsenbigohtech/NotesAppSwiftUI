@@ -30,7 +30,6 @@ class HomeVC: UIViewController {
         self.setupTableView()
         addButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         
-        // Fetch notes after initializing coreDataManager
         fetchNotes()
     }
 
@@ -151,11 +150,10 @@ class HomeVC: UIViewController {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
             notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
-            tableView.reloadData() // Reload the table view after fetching notes
+            tableView.reloadData()
             
-            // Show or hide the placeholder view based on the notes count
             placeholderView.isHidden = !notes.isEmpty
-            tableView.isHidden = notes.isEmpty // Hide the table view if there are no notes
+            tableView.isHidden = notes.isEmpty 
         } catch {
             print("Error fetching notes: \(error)")
         }
@@ -191,7 +189,16 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Handle note selection if needed
+        let selectedNote = notes[indexPath.row]
+                let notesVC = NotesViewController(coreDataManager: coreDataManager)
+                notesVC.noteToEdit = selectedNote
+                
+                notesVC.onSave = { [weak self] title, body in
+                    self?.fetchNotes()
+                }
+                
+                notesVC.modalPresentationStyle = .fullScreen
+                present(notesVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
