@@ -10,7 +10,7 @@ import CoreData
 class NotesViewController: UIViewController {
     
     var backButton: UIButton!
-    var button1: UIButton!
+//    var button1: UIButton!
     var saveButton: UIButton!
     var titleTextField: UITextView!
     var bodyTextField: UITextView!
@@ -55,13 +55,13 @@ class NotesViewController: UIViewController {
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
-        button1 = UIButton()
-        
-        button1.setImage(UIImage(named: "eyeImg"), for: .normal)
-        button1.setTitleColor(.label, for: .normal)
-        button1.backgroundColor = .clear
-        button1.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(button1)
+//        button1 = UIButton()
+//        
+//        button1.setImage(UIImage(named: "eyeImg"), for: .normal)
+//        button1.setTitleColor(.label, for: .normal)
+//        button1.backgroundColor = .clear
+//        button1.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(button1)
         
         saveButton = UIButton()
         saveButton.setImage(UIImage(named: "save"), for: .normal)
@@ -71,10 +71,10 @@ class NotesViewController: UIViewController {
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
-            button1.trailingAnchor.constraint(equalTo: saveButton.leadingAnchor, constant: -10),
-            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            button1.widthAnchor.constraint(equalToConstant: 50),
-            button1.heightAnchor.constraint(equalToConstant: 50),
+//            button1.trailingAnchor.constraint(equalTo: saveButton.leadingAnchor, constant: -10),
+//            button1.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+//            button1.widthAnchor.constraint(equalToConstant: 50),
+//            button1.heightAnchor.constraint(equalToConstant: 50),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             saveButton.widthAnchor.constraint(equalToConstant: 50),
@@ -101,7 +101,7 @@ class NotesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            titleTextField.topAnchor.constraint(equalTo: button1.bottomAnchor, constant: 20),
+            titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             titleTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
