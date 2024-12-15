@@ -195,7 +195,7 @@ class NotesViewController: UIViewController {
         let saveButtonInAlert = UIButton()
         saveButtonInAlert.setTitle("Save", for: .normal)
         saveButtonInAlert.setTitleColor(.background, for: .normal)
-        saveButtonInAlert.backgroundColor = .appRed
+        saveButtonInAlert.backgroundColor = UIColor(named: "appGreen")
         saveButtonInAlert.layer.cornerRadius = 5
         saveButtonInAlert.translatesAutoresizingMaskIntoConstraints = false
                 alertView.addSubview(saveButtonInAlert)
