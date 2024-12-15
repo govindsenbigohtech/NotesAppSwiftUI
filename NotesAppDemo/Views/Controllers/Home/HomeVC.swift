@@ -31,6 +31,7 @@ class HomeVC: UIViewController {
         addButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         
         fetchNotes()
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     }
 
     private func setupUI() {
@@ -95,6 +96,13 @@ class HomeVC: UIViewController {
                         infoButton.widthAnchor.constraint(equalToConstant: 50),
                         infoButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+    
+    @objc func searchButtonTapped() {
+        let searchVC = SearchViewController()
+        searchVC.updateNotes(notes) // Pass the notes to the search view controller
+        searchVC.modalPresentationStyle = .fullScreen
+        present(searchVC, animated: true, completion: nil)
     }
     
     private func setupImageForPlaceholder() {
