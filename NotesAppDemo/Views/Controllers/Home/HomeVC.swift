@@ -71,6 +71,16 @@ class HomeVC: UIViewController {
         present(notesVC, animated: true, completion: nil)
     }
     
+//    @objc func plusButtonTapped() {
+//        let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
+//        notesVC.isNewNote = true
+//        notesVC.onSave = { [weak self] title, body in
+//            self?.viewModel.addNote(title: title, body: body)
+//        }
+//        notesVC.modalPresentationStyle = .fullScreen
+//        present(notesVC, animated: true, completion: nil)
+//    }
+    
     @objc func searchButtonTapped() {
         let searchVC = SearchViewController()
         searchVC.updateNotes(viewModel.notes)

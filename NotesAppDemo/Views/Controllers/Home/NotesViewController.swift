@@ -349,23 +349,63 @@ class NotesViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    
     @objc func saveButtonInAlertTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
-        
-        coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
-        
-        onSave?(title, body)
-        
+
+        // Check if title and body are valid
+        if isValidNoteTitle(title) || isValidNoteBody(body) {
+            coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
+            onSave?(title, body)
+            
+            // Dismiss the alert
+            dismissAlert()
+        } else {
+            // Show an alert or a message to the user indicating that the note is invalid
+            showInvalidNoteAlert()
+        }
+    }
+
+    private func isValidNoteTitle(_ title: String) -> Bool {
+        return !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && title != titlePlaceholder
+    }
+
+    private func isValidNoteBody(_ body: String) -> Bool {
+        return !body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && body != bodyPlaceholder
+    }
+
+    private func dismissAlert() {
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
                 subview.removeFromSuperview()
             }
         }
-        
         self.dismiss(animated: true, completion: nil)
     }
+
+    private func showInvalidNoteAlert() {
+        let alert = UIAlertController(title: "Invalid Note", message: "Please enter a valid title and body for the note.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+//    @objc func saveButtonInAlertTapped() {
+//        let title = titleTextField.text ?? ""
+//        let body = bodyTextField.text ?? ""
+//        
+//        coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
+//        
+//        onSave?(title, body)
+//        
+//        for subview in view.subviews {
+//            if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
+//                subview.removeFromSuperview()
+//            }
+//        }
+//        
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     @objc func dismissView() {
         showDiscardAlert()
