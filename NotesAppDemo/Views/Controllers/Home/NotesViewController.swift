@@ -340,16 +340,6 @@ class NotesViewController: UIViewController {
             discardButton.widthAnchor.constraint(equalToConstant: 120),
             discardButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-
-        
-//        NSLayoutConstraint.activate([
-//            keepButton.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20),
-//            keepButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
-//            keepButton.widthAnchor.constraint(equalToConstant: 120),
-//            keepButton.heightAnchor.constraint(equalToConstant: 40)
-//        ])
-        
-        
         
         keepButton.addTarget(self, action: #selector(dismissTheView), for: .touchUpInside)
         discardButton.addTarget(self, action: #selector(confirmDiscard), for: .touchUpInside)
@@ -358,7 +348,7 @@ class NotesViewController: UIViewController {
     @objc func dismissTheView() {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     
     @objc func saveButtonInAlertTapped() {
         let title = titleTextField.text ?? ""
@@ -389,19 +379,6 @@ class NotesViewController: UIViewController {
         }
         self.dismiss(animated: true, completion: nil)
     }
-
-
-    
-//    @objc func dismissView() {
-//        for subview in view.subviews {
-//            if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
-//                subview.removeFromSuperview()
-//            }
-//        }
-//        self.dismiss(animated: true, completion: nil)
-//    }
-    
-    
     
     @objc func backButtonTapped() {
         let title = titleTextField.text ?? ""
