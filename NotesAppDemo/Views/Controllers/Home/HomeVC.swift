@@ -90,8 +90,8 @@ class HomeVC: UIViewController {
             view.addSubview(addButton)
     
             NSLayoutConstraint.activate([
-                addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+                addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+                addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
                 addButton.widthAnchor.constraint(equalToConstant: 70),
                 addButton.heightAnchor.constraint(equalToConstant: 70)
             ])
@@ -104,7 +104,7 @@ class HomeVC: UIViewController {
     
             NSLayoutConstraint.activate([
                 notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-                notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 47),
+                notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
                 notesLabel.widthAnchor.constraint(equalToConstant: 115),
                 notesLabel.heightAnchor.constraint(equalToConstant: 59)
             ])
@@ -119,8 +119,8 @@ class HomeVC: UIViewController {
             view.addSubview(searchButton)
     
             NSLayoutConstraint.activate([
-                searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+                searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+                searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
                 searchButton.widthAnchor.constraint(equalToConstant: 50),
                 searchButton.heightAnchor.constraint(equalToConstant: 50)
             ])
@@ -152,8 +152,10 @@ class HomeVC: UIViewController {
     
                 placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
                 placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
-                placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-                placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
+                placeholderImageView.widthAnchor.constraint(equalToConstant: 350),
+                placeholderImageView.heightAnchor.constraint(equalToConstant: 287),
+//                placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+//                placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
     
                 placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
                 placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
