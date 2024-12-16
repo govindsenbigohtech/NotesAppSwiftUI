@@ -78,92 +78,90 @@ class HomeVC: UIViewController {
         present(searchVC, animated: true, completion: nil)
     }
     
-        private func setupUI() {
-            self.setupImageForPlaceholder()
+    private func setupUI() {
+        self.setupImageForPlaceholder()
+        
+        addButton = UIButton()
+        addButton.setImage(UIImage(named: "add"), for: .normal)
+        addButton.setTitleColor(.label, for: .normal)
+        addButton.backgroundColor = .clear
+        addButton.layer.cornerRadius = 35
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addButton)
+        
+        NSLayoutConstraint.activate([
+            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
+            addButton.widthAnchor.constraint(equalToConstant: 70),
+            addButton.heightAnchor.constraint(equalToConstant: 70)
+        ])
+        
+        notesLabel = UILabel()
+        notesLabel.text = "Notes"
+        notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
+        notesLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(notesLabel)
+        
+        NSLayoutConstraint.activate([
+            notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            notesLabel.widthAnchor.constraint(equalToConstant: 115),
+            notesLabel.heightAnchor.constraint(equalToConstant: 59)
+        ])
+        
+        searchButton = UIButton()
+        searchButton.setImage(UIImage(named: "search"), for: .normal)
+        searchButton.contentMode = .scaleAspectFit
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.backgroundColor = .appGray
+        searchButton.layer.cornerRadius = 15
+        searchButton.layer.masksToBounds = true
+        view.addSubview(searchButton)
+        
+        NSLayoutConstraint.activate([
+            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            searchButton.widthAnchor.constraint(equalToConstant: 50),
+            searchButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+    }
     
-            addButton = UIButton()
-            addButton.setImage(UIImage(named: "add"), for: .normal)
-            addButton.setTitleColor(.label, for: .normal)
-            addButton.backgroundColor = .clear
-            addButton.layer.cornerRadius = 35
-            addButton.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(addButton)
-    
-            NSLayoutConstraint.activate([
-                addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-                addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
-                addButton.widthAnchor.constraint(equalToConstant: 70),
-                addButton.heightAnchor.constraint(equalToConstant: 70)
-            ])
-    
-            notesLabel = UILabel()
-            notesLabel.text = "Notes"
-            notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
-            notesLabel.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(notesLabel)
-    
-            NSLayoutConstraint.activate([
-                notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-                notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-                notesLabel.widthAnchor.constraint(equalToConstant: 115),
-                notesLabel.heightAnchor.constraint(equalToConstant: 59)
-            ])
-    
-            searchButton = UIButton()
-            searchButton.setImage(UIImage(named: "search"), for: .normal)
-            searchButton.contentMode = .scaleAspectFit
-            searchButton.translatesAutoresizingMaskIntoConstraints = false
-            searchButton.backgroundColor = .appGray
-            searchButton.layer.cornerRadius = 15
-            searchButton.layer.masksToBounds = true
-            view.addSubview(searchButton)
-    
-            NSLayoutConstraint.activate([
-                searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-                searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-                searchButton.widthAnchor.constraint(equalToConstant: 50),
-                searchButton.heightAnchor.constraint(equalToConstant: 50)
-            ])
-        }
-    
-        private func setupImageForPlaceholder() {
-            placeholderView = UIView()
-            placeholderView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(placeholderView)
-    
-            let placeholderImageView = UIImageView()
-            placeholderImageView.image = UIImage(named: "notesImg")
-            placeholderImageView.contentMode = .scaleAspectFit
-            placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-            placeholderView.addSubview(placeholderImageView)
-    
-            let placeholderLabel = UILabel()
-            placeholderLabel.text = "Create your first note!"
-            placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
-            placeholderLabel.textAlignment = .center
-            placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-            placeholderView.addSubview(placeholderLabel)
-    
-            NSLayoutConstraint.activate([
-                placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-                placeholderView.widthAnchor.constraint(equalToConstant: 350),
-                placeholderView.heightAnchor.constraint(equalToConstant: 287),
-    
-                placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-                placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
-                placeholderImageView.widthAnchor.constraint(equalToConstant: 350),
-                placeholderImageView.heightAnchor.constraint(equalToConstant: 287),
-//                placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-//                placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
-    
-                placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-                placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
-                placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-            ])
-    
-            placeholderView.isHidden = true
-        }
+    private func setupImageForPlaceholder() {
+        placeholderView = UIView()
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(placeholderView)
+        
+        let placeholderImageView = UIImageView()
+        placeholderImageView.image = UIImage(named: "notesImg")
+        placeholderImageView.contentMode = .scaleAspectFit
+        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.addSubview(placeholderImageView)
+        
+        let placeholderLabel = UILabel()
+        placeholderLabel.text = "Create your first note!"
+        placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.addSubview(placeholderLabel)
+        
+        NSLayoutConstraint.activate([
+            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            placeholderView.widthAnchor.constraint(equalToConstant: 350),
+            placeholderView.heightAnchor.constraint(equalToConstant: 287),
+            
+            placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+            placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
+            placeholderImageView.widthAnchor.constraint(equalToConstant: 350),
+            placeholderImageView.heightAnchor.constraint(equalToConstant: 287),
+            
+            placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+            placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
+            placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+        ])
+        
+        placeholderView.isHidden = true
+    }
     
     private func setupTableView() {
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")

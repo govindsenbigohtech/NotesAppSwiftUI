@@ -120,7 +120,7 @@ class NotesViewController: UIViewController {
         view.addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
-
+            
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),

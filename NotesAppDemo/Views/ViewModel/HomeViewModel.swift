@@ -13,7 +13,7 @@ class HomeViewModel {
     let coreDataManager: CoreDataManager
     var notes: [Note] = []
     
-
+    
     var onNotesUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
     
