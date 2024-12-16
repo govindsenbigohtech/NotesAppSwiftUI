@@ -10,10 +10,9 @@ import Foundation
 import CoreData
 
 class HomeViewModel {
+    
     let coreDataManager: CoreDataManager
     var notes: [Note] = []
-    
-    
     var onNotesUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
     
