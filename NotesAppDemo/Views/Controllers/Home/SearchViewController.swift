@@ -21,133 +21,44 @@ class SearchViewController: UIViewController {
     
     private func setupUI() {
         view.backgroundColor = .black
-
+        
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
-
+        
         searchBar.delegate = self
         searchBar.placeholder = "Search by the keyword..."
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         
-        // Customize the search bar appearance
-//        searchBar.backgroundImage = UIImage() // Remove the default background
         searchBar.layer.cornerRadius = 30
         searchBar.layer.masksToBounds = true
         searchBar.searchTextField.backgroundColor = .appGray
         
-        // Remove default search bar icon
-//        if let leftIconView = searchBar.searchTextField.leftView as? UIImageView {
-//            leftIconView.image = nil
-//        }
-        
         view.addSubview(searchBar)
-
+        
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-
+            
             searchBar.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             searchBar.heightAnchor.constraint(equalToConstant: 50),
-
+            
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
-    
-//    private func setupUI() {
-//        view.backgroundColor = .black
-//
-//        let backButton = UIButton(type: .system)
-//        backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
-//        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-//        backButton.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(backButton)
-//
-//        searchBar.delegate = self
-//        searchBar.placeholder = "Search by the keyword..."
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        // Customize the search bar appearance
-//        searchBar.backgroundImage = UIImage() // Remove default background
-//        searchBar.layer.cornerRadius = 30
-//        
-//        searchBar.layer.masksToBounds = true
-//        searchBar.searchTextField.backgroundColor = .appGray // Optional: Customize the text field background
-//        
-//        view.addSubview(searchBar)
-//
-//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(tableView)
-//
-//        NSLayoutConstraint.activate([
-//            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//
-//            searchBar.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
-//            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-//            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-//            searchBar.heightAnchor.constraint(equalToConstant: 50),
-//
-//            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-//        ])
-//    }
-
-    
-//    private func setupUI() {
-//        view.backgroundColor = .black
-//        
-//        let backButton = UIButton(type: .system)
-//        backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
-//        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-//        backButton.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(backButton)
-//        
-//        searchBar.delegate = self
-//        searchBar.placeholder = "Search by the keyword..."
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(searchBar)
-//        
-//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(tableView)
-//        
-//        NSLayoutConstraint.activate([
-//            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            
-//            searchBar.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
-//            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            
-//            
-//            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-//        ])
-//    }
     
     @objc private func backButtonTapped() {
         dismiss(animated: true, completion: nil)

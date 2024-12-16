@@ -95,14 +95,14 @@ class NotesViewController: UIViewController {
         editButton.backgroundColor = .clear
         editButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(editButton)
-
+        
         NSLayoutConstraint.activate([
             editButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             editButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
             editButton.widthAnchor.constraint(equalToConstant: 50),
             editButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-
+        
         editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
         
         titleTextField = UITextView()
@@ -173,51 +173,51 @@ class NotesViewController: UIViewController {
         overlayView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
-
+        
         NSLayoutConstraint.activate([
             overlayView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             overlayView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             overlayView.topAnchor.constraint(equalTo: view.topAnchor),
             overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
+        
         let alertView = UIView()
         alertView.backgroundColor = .appGray
         alertView.layer.cornerRadius = 10
         alertView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alertView)
-
+        
         NSLayoutConstraint.activate([
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             alertView.widthAnchor.constraint(equalToConstant: 300),
             alertView.heightAnchor.constraint(equalToConstant: 200)
         ])
-
+        
         let imageView = UIImageView()
         imageView.image = UIImage(named: "info")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(imageView)
-
+        
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
             imageView.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 41),
             imageView.widthAnchor.constraint(equalToConstant: 36),
             imageView.heightAnchor.constraint(equalToConstant: 36)
         ])
-
+        
         let label = UILabel()
         label.text = "Save changes?"
         label.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
         label.textColor = .background
         label.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(label)
-
-                NSLayoutConstraint.activate([
+        
+        NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
             label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20)
         ])
-
+        
         let discardButton = UIButton()
         discardButton.setTitle("Discard", for: .normal)
         discardButton.setTitleColor(.background, for: .normal)
@@ -225,14 +225,14 @@ class NotesViewController: UIViewController {
         discardButton.layer.cornerRadius = 5
         discardButton.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(discardButton)
-
+        
         NSLayoutConstraint.activate([
             discardButton.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 20),
             discardButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
             discardButton.widthAnchor.constraint(equalToConstant: 120),
             discardButton.heightAnchor.constraint(equalToConstant: 40)
         ])
-
+        
         let saveButtonInAlert = UIButton()
         saveButtonInAlert.setTitle("Save", for: .normal)
         saveButtonInAlert.setTitleColor(.background, for: .normal)
@@ -240,35 +240,35 @@ class NotesViewController: UIViewController {
         saveButtonInAlert.layer.cornerRadius = 5
         saveButtonInAlert.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(saveButtonInAlert)
-
+        
         NSLayoutConstraint.activate([
             saveButtonInAlert.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20),
             saveButtonInAlert.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
             saveButtonInAlert.widthAnchor.constraint(equalToConstant: 120),
             saveButtonInAlert.heightAnchor.constraint(equalToConstant: 40)
         ])
-
+        
         saveButtonInAlert.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
         discardButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
-
+    
     @objc func saveButtonInAlertTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
-
+        
         coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
-
+        
         onSave?(title, body)
-
+        
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
                 subview.removeFromSuperview()
             }
         }
-
+        
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     @objc func dismissView() {
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
@@ -279,12 +279,12 @@ class NotesViewController: UIViewController {
     }
     
     
-
+    
     @objc func backButtonTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         showSaveAlert(title: title, body: body)
-
+        
     }
 }
 

@@ -9,7 +9,7 @@ import CoreData
 
 class CoreDataManager {
     let persistentContainer: NSPersistentContainer
-
+    
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
@@ -32,11 +32,11 @@ class CoreDataManager {
             print("Failed to save note: \(error)")
         }
     }
-
+    
     func delete(note: Note) {
         let context = persistentContainer.viewContext
         context.delete(note)
-
+        
         do {
             try context.save()
         } catch {

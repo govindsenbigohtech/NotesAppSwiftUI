@@ -13,7 +13,6 @@ class HomeVC: UIViewController {
     var addButton: UIButton!
     var notesLabel: UILabel!
     var searchButton: UIButton!
-//    var infoButton: UIButton!
     let tableView = UITableView()
     var coreDataManager: CoreDataManager!
     
@@ -33,10 +32,10 @@ class HomeVC: UIViewController {
         fetchNotes()
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
     }
-
+    
     private func setupUI() {
         self.setupImageForPlaceholder()
-
+        
         addButton = UIButton()
         addButton.setImage(UIImage(named: "add"), for: .normal)
         addButton.setTitleColor(.label, for: .normal)
@@ -44,20 +43,20 @@ class HomeVC: UIViewController {
         addButton.layer.cornerRadius = 35
         addButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addButton)
-
+        
         NSLayoutConstraint.activate([
             addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             addButton.widthAnchor.constraint(equalToConstant: 70),
             addButton.heightAnchor.constraint(equalToConstant: 70)
         ])
-
+        
         notesLabel = UILabel()
         notesLabel.text = "Notes"
         notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(notesLabel)
-
+        
         NSLayoutConstraint.activate([
             notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 47),
@@ -65,21 +64,21 @@ class HomeVC: UIViewController {
             notesLabel.heightAnchor.constraint(equalToConstant: 59)
         ])
         
-                searchButton = UIButton()
-                searchButton.setImage(UIImage(named: "search"), for: .normal)
-                searchButton.contentMode = .scaleAspectFit
-                searchButton.translatesAutoresizingMaskIntoConstraints = false
-                searchButton.backgroundColor = .appGray
-                searchButton.layer.cornerRadius = 15
-                searchButton.layer.masksToBounds = true
-                view.addSubview(searchButton)
-
-                NSLayoutConstraint.activate([
-                    searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-                    searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-                    searchButton.widthAnchor.constraint(equalToConstant: 50),
-                    searchButton.heightAnchor.constraint(equalToConstant: 50)
-                ])
+        searchButton = UIButton()
+        searchButton.setImage(UIImage(named: "search"), for: .normal)
+        searchButton.contentMode = .scaleAspectFit
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.backgroundColor = .appGray
+        searchButton.layer.cornerRadius = 15
+        searchButton.layer.masksToBounds = true
+        view.addSubview(searchButton)
+        
+        NSLayoutConstraint.activate([
+            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            searchButton.widthAnchor.constraint(equalToConstant: 50),
+            searchButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     @objc func searchButtonTapped() {
@@ -90,40 +89,40 @@ class HomeVC: UIViewController {
     }
     
     private func setupImageForPlaceholder() {
-         placeholderView = UIView()
-         placeholderView.translatesAutoresizingMaskIntoConstraints = false
-         view.addSubview(placeholderView)
-
-         let placeholderImageView = UIImageView()
-         placeholderImageView.image = UIImage(named: "notesImg")
-         placeholderImageView.contentMode = .scaleAspectFit
-         placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-         placeholderView.addSubview(placeholderImageView)
-
-         let placeholderLabel = UILabel()
-         placeholderLabel.text = "Create your first note!"
+        placeholderView = UIView()
+        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(placeholderView)
+        
+        let placeholderImageView = UIImageView()
+        placeholderImageView.image = UIImage(named: "notesImg")
+        placeholderImageView.contentMode = .scaleAspectFit
+        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.addSubview(placeholderImageView)
+        
+        let placeholderLabel = UILabel()
+        placeholderLabel.text = "Create your first note!"
         placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
-         placeholderLabel.textAlignment = .center
-         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-         placeholderView.addSubview(placeholderLabel)
-
-         NSLayoutConstraint.activate([
-             placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-             placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-             placeholderView.widthAnchor.constraint(equalToConstant: 350),
-             placeholderView.heightAnchor.constraint(equalToConstant: 280),
-
-             placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-             placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
-             placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-             placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
-
-             placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-             placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
-             placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-         ])
-
-         placeholderView.isHidden = true
+        placeholderLabel.textAlignment = .center
+        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+        placeholderView.addSubview(placeholderLabel)
+        
+        NSLayoutConstraint.activate([
+            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            placeholderView.widthAnchor.constraint(equalToConstant: 350),
+            placeholderView.heightAnchor.constraint(equalToConstant: 280),
+            
+            placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+            placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
+            placeholderImageView.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+            placeholderImageView.heightAnchor.constraint(equalTo: placeholderView.heightAnchor, multiplier: 0.7),
+            
+            placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+            placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
+            placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+        ])
+        
+        placeholderView.isHidden = true
     }
     
     private func setupTableView() {
@@ -132,14 +131,14 @@ class HomeVC: UIViewController {
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
-
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 20),
             tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
         ])
-
+        
         tableView.isHidden = true
     }
     
@@ -166,8 +165,8 @@ class HomeVC: UIViewController {
         secondVC.modalPresentationStyle = .fullScreen
         present(secondVC, animated: true, completion: nil)
     }
-
-
+    
+    
     class func instantiate() -> HomeVC {
         let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
         return vc
@@ -178,7 +177,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notes.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
         cell.configureCell(note: notes[indexPath.row])
