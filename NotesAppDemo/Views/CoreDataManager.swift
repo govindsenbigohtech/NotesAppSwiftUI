@@ -13,29 +13,14 @@ class CoreDataManager {
     init(persistentContainer: NSPersistentContainer) {
         self.persistentContainer = persistentContainer
     }
-
-//    func saveNote(title: String, body: String) {
-//        let context = persistentContainer.viewContext
-//        let note = Note(context: context)
-//        note.title = title
-//        note.body = body
-//
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Failed to save note: \(error)")
-//        }
-//    }
     
     func saveNote(title: String, body: String, note: Note? = nil) {
         let context = persistentContainer.viewContext
         
         if let noteToUpdate = note {
-            // Update existing note
             noteToUpdate.title = title
             noteToUpdate.body = body
         } else {
-            // Create a new note
             let newNote = Note(context: context)
             newNote.title = title
             newNote.body = body
@@ -59,35 +44,3 @@ class CoreDataManager {
         }
     }
 }
-
-//class CoreDataManager {
-//    let persistentContainer: NSPersistentContainer
-//    
-//    init(persistentContainer: NSPersistentContainer) {
-//        self.persistentContainer = persistentContainer
-//    }
-//    
-//    func saveNote(title: String, body: String) {
-//        let note = Note(context: persistentContainer.viewContext)
-//        note.title = title
-//        note.body = body
-//        
-//        do {
-//            try persistentContainer.viewContext.save()
-//        } catch {
-//            print("Error saving note: \(error)")
-//        }
-//    }
-//    
-////    func fetchAllNotes() {
-////        let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
-////        do {
-////            let notes = try persistentContainer.viewContext.fetch(fetchRequest)
-////            for note in notes {
-////                print("Title: \(note.title!), Body: \(note.body!)")
-////            }
-////        } catch {
-////            print("Error fetching notes: \(error)")
-////        }
-////    }
-//}

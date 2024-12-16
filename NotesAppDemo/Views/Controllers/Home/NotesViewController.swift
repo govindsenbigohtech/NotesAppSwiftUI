@@ -148,14 +148,14 @@ class NotesViewController: UIViewController {
             // Enable editing
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
-            editButton.setImage(UIImage(named: "save"), for: .normal) // Change image to Save
-            saveButton.isHidden = false // Show save button
+            editButton.setImage(UIImage(named: "save"), for: .normal)
+            saveButton.isHidden = false
         } else {
             // Disable editing and save changes
             titleTextField.isEditable = false
             bodyTextField.isEditable = false
-            editButton.setImage(UIImage(named: "edit"), for: .normal) // Change image back to Edit
-            saveButton.isHidden = true // Hide save button
+            editButton.setImage(UIImage(named: "edit"), for: .normal)
+            saveButton.isHidden = true
             
             // Show the alert for saving changes
             let title = titleTextField.text ?? ""
@@ -165,16 +165,14 @@ class NotesViewController: UIViewController {
     }
     
     @objc func saveButtonTapped() {
-        // Directly show the alert for saving changes
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         showSaveAlert(title: title, body: body)
     }
     
     private func showSaveAlert(title: String, body: String) {
-        // Create a gray overlay view
         let overlayView = UIView()
-        overlayView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8) // Semi-transparent gray
+        overlayView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.8)
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
 
@@ -185,9 +183,8 @@ class NotesViewController: UIViewController {
             overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
-        // Create the alert view
         let alertView = UIView()
-        alertView.backgroundColor = .appGray // Your alert view color
+        alertView.backgroundColor = .appGray
         alertView.layer.cornerRadius = 10
         alertView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alertView)
@@ -261,25 +258,20 @@ class NotesViewController: UIViewController {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
 
-        // Save the note using the core data manager
         coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
 
-        // Call the onSave closure to notify the HomeVC
         onSave?(title, body)
 
-        // Remove the overlay view and alert view
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
                 subview.removeFromSuperview()
             }
         }
 
-        // Dismiss the NotesViewController
         self.dismiss(animated: true, completion: nil)
     }
 
     @objc func dismissView() {
-        // Remove the overlay view and alert view
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
                 subview.removeFromSuperview()
