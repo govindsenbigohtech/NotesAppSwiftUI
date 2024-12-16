@@ -67,7 +67,7 @@ class NotesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 53),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
             backButton.widthAnchor.constraint(equalToConstant: 48),
             backButton.heightAnchor.constraint(equalToConstant: 48)
         ])
@@ -85,9 +85,9 @@ class NotesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 53),
-            saveButton.widthAnchor.constraint(equalToConstant: 50),
-            saveButton.heightAnchor.constraint(equalToConstant: 50)
+            saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
+            saveButton.widthAnchor.constraint(equalToConstant: 48),
+            saveButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
@@ -102,10 +102,10 @@ class NotesViewController: UIViewController {
         view.addSubview(editButton)
         
         NSLayoutConstraint.activate([
-            editButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            editButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            editButton.widthAnchor.constraint(equalToConstant: 50),
-            editButton.heightAnchor.constraint(equalToConstant: 50)
+            editButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            editButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
+            editButton.widthAnchor.constraint(equalToConstant: 48),
+            editButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
@@ -121,8 +121,8 @@ class NotesViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 40),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             titleTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
@@ -138,8 +138,8 @@ class NotesViewController: UIViewController {
         view.addSubview(bodyTextField)
         
         NSLayoutConstraint.activate([
-            bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            bodyTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
+            bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+            bodyTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 40),
             bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
