@@ -32,7 +32,6 @@ class HomeViewModel {
     }
     
     func addNote(title: String, body: String) {
-        coreDataManager.saveNote(title: title, body: body) 
         fetchNotes()
     }
     
