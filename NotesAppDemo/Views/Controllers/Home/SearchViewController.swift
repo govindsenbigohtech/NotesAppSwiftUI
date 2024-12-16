@@ -13,6 +13,8 @@ class SearchViewController: UIViewController {
     
     let searchBar = UISearchBar()
     let tableView = UITableView()
+    let noResultsImageView = UIImageView()
+    let noResultsLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +46,19 @@ class SearchViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
+        noResultsImageView.image = UIImage(named: "cuate")
+        noResultsImageView.contentMode = .scaleAspectFit
+        noResultsImageView.translatesAutoresizingMaskIntoConstraints = false
+        noResultsImageView.isHidden = true
+        view.addSubview(noResultsImageView)
+        
+        noResultsLabel.text = "File not found. Try searching again."
+        noResultsLabel.textColor = .white
+        noResultsLabel.textAlignment = .center
+        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        noResultsLabel.isHidden = true
+        view.addSubview(noResultsLabel)
+        
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -56,7 +71,17 @@ class SearchViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            noResultsImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noResultsImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noResultsImageView.widthAnchor.constraint(equalToConstant: 370),
+            noResultsImageView.heightAnchor.constraint(equalToConstant: 240),
+            
+            noResultsLabel.topAnchor.constraint(equalTo: noResultsImageView.bottomAnchor, constant: 5),
+            noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noResultsLabel.leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: 20),
+            noResultsLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: -20)
         ])
     }
     
@@ -68,6 +93,13 @@ class SearchViewController: UIViewController {
         self.notes = notes
         self.filteredNotes = notes
         tableView.reloadData()
+        updateNoResultsImageVisibility()
+    }
+    
+    private func updateNoResultsImageVisibility() {
+        let hasResults = !filteredNotes.isEmpty
+        noResultsImageView.isHidden = hasResults
+        noResultsLabel.isHidden = hasResults
     }
 }
 
@@ -96,5 +128,6 @@ extension SearchViewController: UISearchBarDelegate {
             }
         }
         tableView.reloadData()
+        updateNoResultsImageVisibility()
     }
 }
