@@ -54,7 +54,6 @@ class HomeVC: UIViewController {
 
         notesLabel = UILabel()
         notesLabel.text = "Notes"
-//        notesLabel.font = UIFont(name: "Nunito-SemiBold", size: 43)
         notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(notesLabel)
@@ -66,7 +65,6 @@ class HomeVC: UIViewController {
             notesLabel.heightAnchor.constraint(equalToConstant: 59)
         ])
         
-        // Setup search button
                 searchButton = UIButton()
                 searchButton.setImage(UIImage(named: "search"), for: .normal)
                 searchButton.contentMode = .scaleAspectFit
@@ -76,7 +74,6 @@ class HomeVC: UIViewController {
                 searchButton.layer.masksToBounds = true
                 view.addSubview(searchButton)
 
-                // Adjust constraints for searchButton
                 NSLayoutConstraint.activate([
                     searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
                     searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
@@ -87,13 +84,12 @@ class HomeVC: UIViewController {
     
     @objc func searchButtonTapped() {
         let searchVC = SearchViewController()
-        searchVC.updateNotes(notes) // Pass the notes to the search view controller
+        searchVC.updateNotes(notes)
         searchVC.modalPresentationStyle = .fullScreen
         present(searchVC, animated: true, completion: nil)
     }
     
     private func setupImageForPlaceholder() {
-        // Create and configure the placeholder view
          placeholderView = UIView()
          placeholderView.translatesAutoresizingMaskIntoConstraints = false
          view.addSubview(placeholderView)
@@ -106,7 +102,6 @@ class HomeVC: UIViewController {
 
          let placeholderLabel = UILabel()
          placeholderLabel.text = "Create your first note!"
-//         placeholderLabel.font = UIFont(name: "Nunito-Regular", size: 20)
         placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
          placeholderLabel.textAlignment = .center
          placeholderLabel.translatesAutoresizingMaskIntoConstraints = false

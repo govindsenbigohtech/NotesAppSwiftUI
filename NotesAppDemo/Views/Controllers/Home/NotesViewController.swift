@@ -41,9 +41,7 @@ class NotesViewController: UIViewController {
         if isNewNote {
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
-//            titleTextField.text = ""
             titleTextField.text = titlePlaceholder
-//            bodyTextField.text = ""
             bodyTextField.text = bodyPlaceholder
             saveButton.isHidden = false
             editButton.isHidden = true
