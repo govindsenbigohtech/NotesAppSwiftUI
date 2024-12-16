@@ -279,10 +279,14 @@ class NotesViewController: UIViewController {
         }
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
 
     @objc func backButtonTapped() {
-        view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        let title = titleTextField.text ?? ""
+        let body = bodyTextField.text ?? ""
+        showSaveAlert(title: title, body: body)
+
     }
 }
 
