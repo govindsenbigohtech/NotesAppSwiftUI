@@ -255,6 +255,111 @@ class NotesViewController: UIViewController {
         discardButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
     }
     
+    private func showDiscardAlert() {
+        
+        let alertView = UIView()
+        alertView.backgroundColor = .appGray
+        alertView.layer.cornerRadius = 10
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alertView)
+        
+        NSLayoutConstraint.activate([
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            alertView.widthAnchor.constraint(equalToConstant: 300),
+            alertView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "info")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(imageView)
+        
+        NSLayoutConstraint.activate([
+            imageView.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 41),
+            imageView.widthAnchor.constraint(equalToConstant: 36),
+            imageView.heightAnchor.constraint(equalToConstant: 36)
+        ])
+        
+        let label = UILabel()
+        label.text = "Are you sure you want to discard your changes?"
+        label.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
+        label.textColor = .background
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
+            label.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10)
+        ])
+        
+        let discardButton = UIButton()
+        discardButton.setTitle("Discard", for: .normal)
+        discardButton.setTitleColor(.background, for: .normal)
+        discardButton.backgroundColor = .appRed
+        discardButton.layer.cornerRadius = 5
+        discardButton.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(discardButton)
+        
+        NSLayoutConstraint.activate([
+            discardButton.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 20),
+            discardButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+            discardButton.widthAnchor.constraint(equalToConstant: 120),
+            discardButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+        
+        let keepButton = UIButton()
+        keepButton.setTitle("Keep", for: .normal)
+        keepButton.setTitleColor(.background, for: .normal)
+        keepButton.backgroundColor = UIColor(named: "appGreen")
+        keepButton.layer.cornerRadius = 5
+        keepButton.translatesAutoresizingMaskIntoConstraints = false
+        alertView.addSubview(keepButton)
+        
+        NSLayoutConstraint.activate([
+            label.centerXAnchor.constraint(equalTo: alertView.centerXAnchor),
+            label.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
+            label.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10),
+            
+            // Updated vertical constraint between label and buttons
+            keepButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5),
+            keepButton.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20),
+            keepButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+            keepButton.widthAnchor.constraint(equalToConstant: 120),
+            keepButton.heightAnchor.constraint(equalToConstant: 40),
+            
+            discardButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5),
+            discardButton.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 20),
+            discardButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+            discardButton.widthAnchor.constraint(equalToConstant: 120),
+            discardButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+
+        
+//        NSLayoutConstraint.activate([
+//            keepButton.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20),
+//            keepButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
+//            keepButton.widthAnchor.constraint(equalToConstant: 120),
+//            keepButton.heightAnchor.constraint(equalToConstant: 40)
+//        ])
+        
+        
+        
+        keepButton.addTarget(self, action: #selector(dismissTheView), for: .touchUpInside)
+        discardButton.addTarget(self, action: #selector(confirmDiscard), for: .touchUpInside)
+    }
+    
+    @objc func dismissTheView() {
+        self.dismiss(animated: true, completion: nil)
+    }
+
+    
     @objc func saveButtonInAlertTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
@@ -273,6 +378,10 @@ class NotesViewController: UIViewController {
     }
     
     @objc func dismissView() {
+        showDiscardAlert()
+    }
+    
+    @objc func confirmDiscard() {
         for subview in view.subviews {
             if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
                 subview.removeFromSuperview()
@@ -280,6 +389,17 @@ class NotesViewController: UIViewController {
         }
         self.dismiss(animated: true, completion: nil)
     }
+
+
+    
+//    @objc func dismissView() {
+//        for subview in view.subviews {
+//            if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
+//                subview.removeFromSuperview()
+//            }
+//        }
+//        self.dismiss(animated: true, completion: nil)
+//    }
     
     
     
