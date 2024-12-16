@@ -9,7 +9,6 @@ import UIKit
 import CoreData
 
 class HomeVC: UIViewController {
-    private var viewModel: HomeViewModel!
     
     var notesImageView: UIImageView!
     var addButton: UIButton!
@@ -17,6 +16,8 @@ class HomeVC: UIViewController {
     var searchButton: UIButton!
     let tableView = UITableView()
     var placeholderView: UIView!
+    
+    private var viewModel: HomeViewModel!
     
     class func instantiate() -> HomeVC {
         let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
@@ -26,7 +27,6 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize ViewModel
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let persistentContainer = appDelegate.getPersistentContainer()
         let coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
