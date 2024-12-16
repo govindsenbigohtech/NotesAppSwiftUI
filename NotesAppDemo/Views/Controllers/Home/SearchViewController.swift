@@ -23,26 +23,22 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .black
         
         let backButton = UIButton(type: .system)
-//        backButton.setTitle("Back", for: .normal)
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         
-        // Set up the search bar
         searchBar.delegate = self
         searchBar.placeholder = "Search by the keyword..."
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(searchBar)
         
-        // Set up the table view
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        // Layout constraints
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -87,11 +83,10 @@ extension SearchViewController: UISearchBarDelegate {
             filteredNotes = notes
         } else {
             filteredNotes = notes.filter { note in
-                // Safely unwrap the title and check if it contains the search text
                 if let title = note.title?.lowercased() {
                     return title.contains(searchText.lowercased())
                 }
-                return false // If title is nil, return false
+                return false
             }
         }
         tableView.reloadData()

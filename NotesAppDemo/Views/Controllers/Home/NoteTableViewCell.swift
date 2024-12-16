@@ -26,13 +26,11 @@ class NoteTableViewCell: UITableViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         
-//        titleLabel.font = UIFont(name: "Nunito", size: 23)
         titleLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
         titleLabel.textColor = .appGray
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(titleLabel)
         
-//        bodyLabel.font = UIFont(name: "Nunito", size: 18)
         bodyLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
         bodyLabel.textColor = .appGray
         bodyLabel.numberOfLines = 0

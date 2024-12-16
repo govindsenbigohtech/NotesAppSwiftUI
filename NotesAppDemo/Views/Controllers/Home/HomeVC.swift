@@ -163,7 +163,7 @@ class HomeVC: UIViewController {
     
     @objc func plusButtonTapped() {
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
-        secondVC.isNewNote = true // Set to true for new note
+        secondVC.isNewNote = true
         secondVC.onSave = { [weak self] title, body in
             self?.fetchNotes()
             self?.tableView.reloadData()
@@ -192,10 +192,10 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedNote = notes[indexPath.row] // Assuming you have an array of notes
+        let selectedNote = notes[indexPath.row] 
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
-        secondVC.noteToEdit = selectedNote // Set the note to edit
-        secondVC.isNewNote = false // Set to false for editing
+        secondVC.noteToEdit = selectedNote
+        secondVC.isNewNote = false
         secondVC.onSave = { [weak self] title, body in
             self?.fetchNotes()
             self?.tableView.reloadData()

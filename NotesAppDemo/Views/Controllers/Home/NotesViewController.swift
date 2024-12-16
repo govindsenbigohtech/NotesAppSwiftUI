@@ -15,6 +15,9 @@ class NotesViewController: UIViewController {
     var titleTextField: UITextView!
     var bodyTextField: UITextView!
     
+    let titlePlaceholder = "Title"
+    let bodyPlaceholder = "Type something..."
+    
     var isEditingMode: Bool = false
     var isNewNote: Bool = false
     
@@ -38,8 +41,10 @@ class NotesViewController: UIViewController {
         if isNewNote {
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
-            titleTextField.text = "" // Clear the default text
-            bodyTextField.text = "" // Clear the default text
+//            titleTextField.text = ""
+            titleTextField.text = titlePlaceholder
+//            bodyTextField.text = ""
+            bodyTextField.text = bodyPlaceholder
             saveButton.isHidden = false
             editButton.isHidden = true
         } else if let note = noteToEdit {
