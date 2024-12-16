@@ -60,6 +60,8 @@ class NotesViewController: UIViewController {
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
         backButton.setTitleColor(.label, for: .normal)
         backButton.backgroundColor = .clear
+        backButton.backgroundColor = UIColor.gray
+        backButton.layer.cornerRadius = 15
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         
@@ -76,6 +78,8 @@ class NotesViewController: UIViewController {
         saveButton.setImage(UIImage(named: "save"), for: .normal)
         saveButton.setTitleColor(.background, for: .normal)
         saveButton.backgroundColor = .clear
+        saveButton.backgroundColor = UIColor.gray
+        saveButton.layer.cornerRadius = 15
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(saveButton)
         
@@ -92,7 +96,8 @@ class NotesViewController: UIViewController {
         editButton = UIButton()
         editButton.setImage(UIImage(named: "edit"), for: .normal)
         editButton.setTitleColor(.background, for: .normal)
-        editButton.backgroundColor = .clear
+        editButton.backgroundColor = .gray
+        editButton.layer.cornerRadius = 15
         editButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(editButton)
         
