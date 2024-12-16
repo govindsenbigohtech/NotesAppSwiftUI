@@ -83,37 +83,6 @@ class HomeVC: UIViewController {
                     searchButton.widthAnchor.constraint(equalToConstant: 50),
                     searchButton.heightAnchor.constraint(equalToConstant: 50)
                 ])
-        
-//        searchButton = UIButton()
-//                searchButton.setImage(UIImage(named: "search"), for: .normal)
-//                searchButton.contentMode = .scaleAspectFit
-//                searchButton.translatesAutoresizingMaskIntoConstraints = false
-//        searchButton.backgroundColor = .appGray
-//        searchButton.layer.cornerRadius = 15
-//            searchButton.layer.masksToBounds = true
-//                view.addSubview(searchButton)
-
-//        
-//        infoButton = UIButton()
-//                infoButton.setImage(UIImage(named: "info_outline"), for: .normal)
-//                infoButton.contentMode = .scaleAspectFit
-//                infoButton.translatesAutoresizingMaskIntoConstraints = false
-//        infoButton.backgroundColor = .appGray
-//        infoButton.layer.cornerRadius = 15
-//            infoButton.layer.masksToBounds = true
-//               view.addSubview(infoButton)
-//
-//        NSLayoutConstraint.activate([
-//            searchButton.trailingAnchor.constraint(equalTo: infoButton.leadingAnchor, constant: -10),
-//                       searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-//                       searchButton.widthAnchor.constraint(equalToConstant: 50),
-//                       searchButton.heightAnchor.constraint(equalToConstant: 50),
-//            
-//            infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//                        infoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-//                        infoButton.widthAnchor.constraint(equalToConstant: 50),
-//                        infoButton.heightAnchor.constraint(equalToConstant: 50)
-//        ])
     }
     
     @objc func searchButtonTapped() {
@@ -202,27 +171,6 @@ class HomeVC: UIViewController {
         secondVC.modalPresentationStyle = .fullScreen
         present(secondVC, animated: true, completion: nil)
     }
-    
-//    @objc func plusButtonTapped() {
-//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
-//        secondVC.isNewNote = true // Set to true for new note
-//        secondVC.onSave = { [weak self] title, body in
-//            self?.fetchNotes()
-//            self?.tableView.reloadData()
-//        }
-//        secondVC.modalPresentationStyle = .fullScreen
-//        present(secondVC, animated: true, completion: nil)
-//    }
-    
-//    @objc func plusButtonTapped() {
-//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
-//        secondVC.onSave = { [weak self] title, body in
-//            self?.fetchNotes()
-//            self?.tableView.reloadData()
-//        }
-//        secondVC.modalPresentationStyle = .fullScreen
-//        present(secondVC, animated: true, completion: nil)
-//    }
 
 
     class func instantiate() -> HomeVC {
@@ -255,33 +203,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         secondVC.modalPresentationStyle = .fullScreen
         present(secondVC, animated: true, completion: nil)
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedNote = notes[indexPath.row] // Assuming you have an array of notes
-//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
-//        secondVC.noteToEdit = selectedNote // Set the note to edit
-//        secondVC.isNewNote = false // Set to false for editing
-//        secondVC.onSave = { [weak self] title, body in
-//            self?.fetchNotes()
-//            self?.tableView.reloadData()
-//        }
-//        secondVC.modalPresentationStyle = .fullScreen
-//        present(secondVC, animated: true, completion: nil)
-//    }
-
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let selectedNote = notes[indexPath.row]
-//                let notesVC = NotesViewController(coreDataManager: coreDataManager)
-//                notesVC.noteToEdit = selectedNote
-//                
-//                notesVC.onSave = { [weak self] title, body in
-//                    self?.fetchNotes()
-//                }
-//                
-//                notesVC.modalPresentationStyle = .fullScreen
-//                present(notesVC, animated: true, completion: nil)
-//    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in

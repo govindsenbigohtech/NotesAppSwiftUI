@@ -5,14 +5,6 @@
 //  Created by Govind-BigOh on 15/12/24.
 //
 
-//import UIKit
-//
-//class SearchViewController: UIViewController {
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-//}
 import UIKit
 
 class SearchViewController: UIViewController {
@@ -30,7 +22,6 @@ class SearchViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .black
         
-        // Create and configure the back button
         let backButton = UIButton(type: .system)
 //        backButton.setTitle("Back", for: .normal)
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
@@ -71,35 +62,9 @@ class SearchViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-//    private func setupUI() {
-//        view.backgroundColor = .white
-//        
-//        searchBar.delegate = self
-//        searchBar.placeholder = "Search notes"
-//        searchBar.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(searchBar)
-//        
-//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(tableView)
-//        
-//        NSLayoutConstraint.activate([
-//            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            
-//            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-//        ])
-//    }
-    
     func updateNotes(_ notes: [Note]) {
         self.notes = notes
-        self.filteredNotes = notes // Initially show all notes
+        self.filteredNotes = notes
         tableView.reloadData()
     }
 }
@@ -132,17 +97,3 @@ extension SearchViewController: UISearchBarDelegate {
         tableView.reloadData()
     }
 }
-
-//extension SearchViewController: UISearchBarDelegate {
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchText.isEmpty {
-//            filteredNotes = notes
-//        } else {
-//            filteredNotes = notes.filter { note in
-//                // Assuming Note has a 'title' property
-//                return note.title?.lowercased().contains(searchText.lowercased())
-//            }
-//        }
-//        tableView.reloadData()
-//    }
-//}
