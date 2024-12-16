@@ -194,6 +194,7 @@ class HomeVC: UIViewController {
     
     @objc func plusButtonTapped() {
         let secondVC = NotesViewController(coreDataManager: coreDataManager)
+        secondVC.isNewNote = true // Set to true for new note
         secondVC.onSave = { [weak self] title, body in
             self?.fetchNotes()
             self?.tableView.reloadData()
@@ -201,6 +202,27 @@ class HomeVC: UIViewController {
         secondVC.modalPresentationStyle = .fullScreen
         present(secondVC, animated: true, completion: nil)
     }
+    
+//    @objc func plusButtonTapped() {
+//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+//        secondVC.isNewNote = true // Set to true for new note
+//        secondVC.onSave = { [weak self] title, body in
+//            self?.fetchNotes()
+//            self?.tableView.reloadData()
+//        }
+//        secondVC.modalPresentationStyle = .fullScreen
+//        present(secondVC, animated: true, completion: nil)
+//    }
+    
+//    @objc func plusButtonTapped() {
+//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+//        secondVC.onSave = { [weak self] title, body in
+//            self?.fetchNotes()
+//            self?.tableView.reloadData()
+//        }
+//        secondVC.modalPresentationStyle = .fullScreen
+//        present(secondVC, animated: true, completion: nil)
+//    }
 
 
     class func instantiate() -> HomeVC {
@@ -220,20 +242,46 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedNote = notes[indexPath.row]
-                let notesVC = NotesViewController(coreDataManager: coreDataManager)
-                notesVC.noteToEdit = selectedNote
-                
-                notesVC.onSave = { [weak self] title, body in
-                    self?.fetchNotes()
-                }
-                
-                notesVC.modalPresentationStyle = .fullScreen
-                present(notesVC, animated: true, completion: nil)
+        let selectedNote = notes[indexPath.row] // Assuming you have an array of notes
+        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+        secondVC.noteToEdit = selectedNote // Set the note to edit
+        secondVC.isNewNote = false // Set to false for editing
+        secondVC.onSave = { [weak self] title, body in
+            self?.fetchNotes()
+            self?.tableView.reloadData()
+        }
+        secondVC.modalPresentationStyle = .fullScreen
+        present(secondVC, animated: true, completion: nil)
     }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedNote = notes[indexPath.row] // Assuming you have an array of notes
+//        let secondVC = NotesViewController(coreDataManager: coreDataManager)
+//        secondVC.noteToEdit = selectedNote // Set the note to edit
+//        secondVC.isNewNote = false // Set to false for editing
+//        secondVC.onSave = { [weak self] title, body in
+//            self?.fetchNotes()
+//            self?.tableView.reloadData()
+//        }
+//        secondVC.modalPresentationStyle = .fullScreen
+//        present(secondVC, animated: true, completion: nil)
+//    }
+
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedNote = notes[indexPath.row]
+//                let notesVC = NotesViewController(coreDataManager: coreDataManager)
+//                notesVC.noteToEdit = selectedNote
+//                
+//                notesVC.onSave = { [weak self] title, body in
+//                    self?.fetchNotes()
+//                }
+//                
+//                notesVC.modalPresentationStyle = .fullScreen
+//                present(notesVC, animated: true, completion: nil)
+//    }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
