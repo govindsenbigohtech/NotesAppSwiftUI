@@ -11,7 +11,7 @@ import CoreData
 
 class HomeViewModel {
     let coreDataManager: CoreDataManager
-    private(set) var notes: [Note] = []
+    var notes: [Note] = []
     
 
     var onNotesUpdated: (() -> Void)?
@@ -32,7 +32,7 @@ class HomeViewModel {
     }
     
     func addNote(title: String, body: String) {
-        coreDataManager.saveNote(title: title, body: body) // Use saveNote instead of create
+        coreDataManager.saveNote(title: title, body: body) 
         fetchNotes()
     }
     
