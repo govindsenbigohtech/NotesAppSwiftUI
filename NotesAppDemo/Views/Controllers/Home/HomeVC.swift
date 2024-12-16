@@ -163,10 +163,6 @@ class HomeVC: UIViewController {
             placeholderView.isHidden = true
         }
     
-//    private func setupUI() {
-//        // Same setupUI code as before
-//    }
-    
     private func setupTableView() {
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self

@@ -13,7 +13,7 @@ class HomeViewModel {
     let coreDataManager: CoreDataManager
     private(set) var notes: [Note] = []
     
-    // Binding for data updates
+
     var onNotesUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
     
@@ -35,11 +35,6 @@ class HomeViewModel {
         coreDataManager.saveNote(title: title, body: body) // Use saveNote instead of create
         fetchNotes()
     }
-
-//    func addNote(title: String, body: String) {
-//        coreDataManager.create(title: title, body: body)
-//        fetchNotes()
-//    }
     
     func deleteNote(at index: Int) {
         let noteToDelete = notes[index]

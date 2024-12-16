@@ -23,7 +23,6 @@ class NotesViewModel {
         note == nil
     }
     
-    // Bindable properties (can be used with reactive frameworks or manual bindings)
     var onNoteSaved: (() -> Void)?
     var onError: ((String) -> Void)?
     

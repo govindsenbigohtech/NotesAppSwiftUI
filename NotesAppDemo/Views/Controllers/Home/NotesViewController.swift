@@ -149,13 +149,11 @@ class NotesViewController: UIViewController {
             editButton.setImage(UIImage(named: "save"), for: .normal)
             saveButton.isHidden = false
         } else {
-            // Disable editing and save changes
             titleTextField.isEditable = false
             bodyTextField.isEditable = false
             editButton.setImage(UIImage(named: "edit"), for: .normal)
             saveButton.isHidden = true
             
-            // Show the alert for saving changes
             let title = titleTextField.text ?? ""
             let body = bodyTextField.text ?? ""
             showSaveAlert(title: title, body: body)
