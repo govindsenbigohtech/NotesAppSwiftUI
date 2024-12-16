@@ -267,7 +267,7 @@ class NotesViewController: UIViewController {
             alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             alertView.widthAnchor.constraint(equalToConstant: 300),
-            alertView.heightAnchor.constraint(equalToConstant: 200)
+            alertView.heightAnchor.constraint(equalToConstant: 250)
         ])
         
         let imageView = UIImageView()
