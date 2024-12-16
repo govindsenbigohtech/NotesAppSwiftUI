@@ -148,7 +148,7 @@ class HomeVC: UIViewController {
                 placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                 placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 placeholderView.widthAnchor.constraint(equalToConstant: 350),
-                placeholderView.heightAnchor.constraint(equalToConstant: 280),
+                placeholderView.heightAnchor.constraint(equalToConstant: 287),
     
                 placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
                 placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),

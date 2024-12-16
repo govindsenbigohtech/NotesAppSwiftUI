@@ -60,16 +60,16 @@ class NotesViewController: UIViewController {
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
         backButton.setTitleColor(.label, for: .normal)
         backButton.backgroundColor = .clear
-        backButton.backgroundColor = UIColor.gray
+        backButton.backgroundColor = UIColor(named: "appGray")
         backButton.layer.cornerRadius = 15
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         
         NSLayoutConstraint.activate([
-            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-            backButton.widthAnchor.constraint(equalToConstant: 50),
-            backButton.heightAnchor.constraint(equalToConstant: 50)
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 23),
+            backButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 53),
+            backButton.widthAnchor.constraint(equalToConstant: 48),
+            backButton.heightAnchor.constraint(equalToConstant: 48)
         ])
         
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
@@ -78,14 +78,14 @@ class NotesViewController: UIViewController {
         saveButton.setImage(UIImage(named: "save"), for: .normal)
         saveButton.setTitleColor(.background, for: .normal)
         saveButton.backgroundColor = .clear
-        saveButton.backgroundColor = UIColor.gray
+        saveButton.backgroundColor = UIColor(named: "appGray")
         saveButton.layer.cornerRadius = 15
         saveButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
-            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            saveButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 53),
             saveButton.widthAnchor.constraint(equalToConstant: 50),
             saveButton.heightAnchor.constraint(equalToConstant: 50)
         ])
@@ -120,7 +120,8 @@ class NotesViewController: UIViewController {
         view.addSubview(titleTextField)
         
         NSLayoutConstraint.activate([
-            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+
+            titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 20),
             titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             titleTextField.heightAnchor.constraint(equalToConstant: 60)
@@ -137,7 +138,7 @@ class NotesViewController: UIViewController {
         view.addSubview(bodyTextField)
         
         NSLayoutConstraint.activate([
-            bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             bodyTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 20),
             bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
