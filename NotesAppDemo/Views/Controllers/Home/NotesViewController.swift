@@ -149,11 +149,10 @@ class NotesViewController: UIViewController {
         isEditingMode.toggle()
         
         if isEditingMode {
-            // Enable editing
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
             editButton.setImage(UIImage(named: "save"), for: .normal)
-            saveButton.isHidden = false
+            saveButton.isHidden = true
         } else {
             titleTextField.isEditable = false
             bodyTextField.isEditable = false
