@@ -22,7 +22,7 @@ class SearchViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .black
+        view.backgroundColor = UIColor(named: "appBlack")
         
         let backButton = UIButton(type: .system)
         backButton.setImage(UIImage(named: "chevron_left"), for: .normal)
@@ -36,13 +36,16 @@ class SearchViewController: UIViewController {
         
         searchBar.layer.cornerRadius = 30
         searchBar.layer.masksToBounds = true
-        searchBar.searchTextField.backgroundColor = .appGray
+        searchBar.backgroundColor = UIColor(named: "appBlack")
+        searchBar.isTranslucent = true
+//        searchBar.searchTextField.backgroundColor = .appGray
         
         view.addSubview(searchBar)
         
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor(named: "appBlack")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         

@@ -36,6 +36,7 @@ class NotesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "appBlack")
         setupUI()
         
         if isNewNote {
@@ -114,7 +115,8 @@ class NotesViewController: UIViewController {
         titleTextField.text = "Title"
         titleTextField.textColor = .appLightGray
         titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
-        titleTextField.backgroundColor = .black
+//        titleTextField.backgroundColor = .black
+        titleTextField.backgroundColor = UIColor(named: "appBlack")
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.delegate = self
         view.addSubview(titleTextField)
@@ -131,7 +133,8 @@ class NotesViewController: UIViewController {
         bodyTextField.text = "Type something..."
         bodyTextField.textColor = .appLightGray
         bodyTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
-        bodyTextField.backgroundColor = .black
+//        bodyTextField.backgroundColor = .black
+        bodyTextField.backgroundColor = UIColor(named: "appBlack")
         bodyTextField.translatesAutoresizingMaskIntoConstraints = false
         bodyTextField.delegate = self
         
