@@ -30,6 +30,7 @@ class NotesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -39,6 +40,7 @@ class NotesViewController: UIViewController {
         view.backgroundColor = UIColor(named: "appBlack")
         setupUI()
         
+        updateTitleTextFieldHeight()
         if isNewNote {
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
@@ -54,6 +56,7 @@ class NotesViewController: UIViewController {
             saveButton.isHidden = true
             editButton.isHidden = false
         }
+        
     }
     
     private func setupUI() {
@@ -116,6 +119,7 @@ class NotesViewController: UIViewController {
         titleTextField.textColor = .appLightGray
         titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
         titleTextField.backgroundColor = UIColor(named: "appBlack")
+        titleTextField.isScrollEnabled = false
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.delegate = self
         view.addSubview(titleTextField)
@@ -144,6 +148,15 @@ class NotesViewController: UIViewController {
             bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+    
+    private func updateTitleTextFieldHeight() {
+        let size = titleTextField.sizeThatFits(CGSize(width: titleTextField.frame.width, height: CGFloat.greatestFiniteMagnitude))
+        titleTextField.constraints.forEach { constraint in
+            if constraint.firstAttribute == .height {
+                constraint.constant = size.height
+            }
+        }
     }
     
     @objc func editButtonTapped() {
@@ -465,6 +478,10 @@ extension NotesViewController: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
+        if textView == titleTextField {
+            updateTitleTextFieldHeight()
+        }
+        
         if textView.text.count > 0 {
             if textView.text.first == "\n" {
                 textView.text = String(textView.text.dropFirst())
