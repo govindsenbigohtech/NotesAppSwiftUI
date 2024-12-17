@@ -48,7 +48,9 @@ class NotesViewController: UIViewController {
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
             titleTextField.text = titlePlaceholder
+            titleTextField.textColor = .appLightGray
             bodyTextField.text = bodyPlaceholder
+            bodyTextField.textColor = .appLightGray
             saveButton.isHidden = false
             editButton.isHidden = true
         } else if let note = noteToEdit {
@@ -60,6 +62,9 @@ class NotesViewController: UIViewController {
             bodyTextField.isEditable = false
             saveButton.isHidden = true
             editButton.isHidden = false
+            
+                titleTextField.textColor = .background
+                bodyTextField.textColor = .background
         }
         
     }
