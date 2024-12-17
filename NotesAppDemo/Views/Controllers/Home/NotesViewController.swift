@@ -438,12 +438,9 @@ class NotesViewController: UIViewController {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
 
-        // Check if there are changes
         if hasChanges() {
-            // If there are changes, show the save alert
             showSaveAlert(title: title, body: body)
         } else {
-            // If there are no changes, simply pop the view controller
             navigationController?.popViewController(animated: true)
         }
     }
