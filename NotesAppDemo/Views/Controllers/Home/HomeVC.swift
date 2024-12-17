@@ -88,6 +88,8 @@ class HomeVC: UIViewController {
         addButton.setTitleColor(.label, for: .normal)
         addButton.backgroundColor = .clear
         addButton.layer.cornerRadius = 35
+        addButton.layer.borderWidth = 1
+        addButton.layer.borderColor = UIColor.clear.cgColor
         addButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addButton)
         
