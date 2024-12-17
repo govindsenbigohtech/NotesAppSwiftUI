@@ -115,7 +115,6 @@ class NotesViewController: UIViewController {
         titleTextField.text = "Title"
         titleTextField.textColor = .appLightGray
         titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
-//        titleTextField.backgroundColor = .black
         titleTextField.backgroundColor = UIColor(named: "appBlack")
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
         titleTextField.delegate = self
@@ -133,7 +132,6 @@ class NotesViewController: UIViewController {
         bodyTextField.text = "Type something..."
         bodyTextField.textColor = .appLightGray
         bodyTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 23)
-//        bodyTextField.backgroundColor = .black
         bodyTextField.backgroundColor = UIColor(named: "appBlack")
         bodyTextField.translatesAutoresizingMaskIntoConstraints = false
         bodyTextField.delegate = self
@@ -392,26 +390,15 @@ class NotesViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    
-//    @objc func saveButtonInAlertTapped() {
-//        let title = titleTextField.text ?? ""
-//        let body = bodyTextField.text ?? ""
-//        
-//        coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
-//        
-//        onSave?(title, body)
-//        
-//        for subview in view.subviews {
-//            if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
-//                subview.removeFromSuperview()
-//            }
-//        }
-//        
-//        self.dismiss(animated: true, completion: nil)
-//    }
-    
     @objc func dismissView() {
-        showDiscardAlert()
+        let title = titleTextField.text ?? ""
+            let body = bodyTextField.text ?? ""
+            
+            if isValidNoteTitle(title) || isValidNoteBody(body) {
+                showDiscardAlert()
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
     }
     
     @objc func confirmDiscard() {
@@ -426,7 +413,11 @@ class NotesViewController: UIViewController {
     @objc func backButtonTapped() {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
-        showSaveAlert(title: title, body: body)
+        if isValidNoteTitle(title) || isValidNoteBody(body) {
+               showSaveAlert(title: title, body: body)
+           } else {
+               self.dismiss(animated: true, completion: nil)
+           }
         
     }
 }
