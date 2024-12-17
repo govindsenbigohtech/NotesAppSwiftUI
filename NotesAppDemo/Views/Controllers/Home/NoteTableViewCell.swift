@@ -32,6 +32,8 @@ class NoteTableViewCell: UITableViewCell {
     }
     
     func setupUI() {
+        var backgroundConfig = UIBackgroundConfiguration.clear()
+        self.backgroundConfiguration = backgroundConfig
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         
