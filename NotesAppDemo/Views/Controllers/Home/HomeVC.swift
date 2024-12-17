@@ -131,7 +131,7 @@ class HomeVC: UIViewController {
         
         NSLayoutConstraint.activate([
             searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            searchButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
+            searchButton.centerYAnchor.constraint(equalTo: notesLabel.centerYAnchor),
             searchButton.widthAnchor.constraint(equalToConstant: 50),
             searchButton.heightAnchor.constraint(equalToConstant: 50)
         ])
