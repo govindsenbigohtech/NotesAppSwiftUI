@@ -24,6 +24,7 @@ class HomeViewModel {
         let fetchRequest: NSFetchRequest<Note> = Note.fetchRequest()
         do {
             notes = try coreDataManager.persistentContainer.viewContext.fetch(fetchRequest)
+            notes.sort { ($0.timestamp ?? Date.distantPast) > ($1.timestamp ?? Date.distantPast) }
             onNotesUpdated?()
         } catch {
             onError?("Error fetching notes: \(error.localizedDescription)")

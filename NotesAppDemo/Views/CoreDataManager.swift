@@ -14,24 +14,45 @@ class CoreDataManager {
         self.persistentContainer = persistentContainer
     }
     
-    func saveNote(title: String, body: String, note: Note? = nil) {
-        let context = persistentContainer.viewContext
-        
-        if let noteToUpdate = note {
-            noteToUpdate.title = title
-            noteToUpdate.body = body
-        } else {
-            let newNote = Note(context: context)
-            newNote.title = title
-            newNote.body = body
-        }
-        
-        do {
-            try context.save()
-        } catch {
-            print("Failed to save note: \(error)")
-        }
-    }
+    func saveNote(title: String, body: String, note: Note?) {
+           let context = persistentContainer.viewContext
+           let noteToSave: Note
+           
+           if let existingNote = note {
+               noteToSave = existingNote
+           } else {
+               noteToSave = Note(context: context)
+           }
+           
+           noteToSave.title = title
+           noteToSave.body = body
+           noteToSave.timestamp = Date() 
+           
+           do {
+               try context.save()
+           } catch {
+               print("Failed to save note: \(error)")
+           }
+       }
+    
+//    func saveNote(title: String, body: String, note: Note? = nil) {
+//        let context = persistentContainer.viewContext
+//        
+//        if let noteToUpdate = note {
+//            noteToUpdate.title = title
+//            noteToUpdate.body = body
+//        } else {
+//            let newNote = Note(context: context)
+//            newNote.title = title
+//            newNote.body = body
+//        }
+//        
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Failed to save note: \(error)")
+//        }
+//    }
     
     func delete(note: Note) {
         let context = persistentContainer.viewContext
