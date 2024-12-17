@@ -77,17 +77,6 @@ class HomeVC: UIViewController {
         navigationController?.pushViewController(notesVC, animated: true)
     }
     
-//    @objc func plusButtonTapped() {
-//        let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
-//        notesVC.isNewNote = true
-//        notesVC.onSave = { [weak self] title, body in
-//            self?.viewModel.addNote(title: title, body: body)
-//        }
-////        notesVC.modalPresentationStyle = .fullScreen
-////        present(notesVC, animated: true, completion: nil)
-//        navigationController?.pushViewController(notesVC, animated: true)
-//    }
-    
     
     @objc func searchButtonTapped() {
         let searchVC = SearchViewController()
@@ -225,7 +214,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             self?.viewModel.fetchNotes()
         }
         notesVC.modalPresentationStyle = .fullScreen
-//        present(notesVC, animated: true, completion: nil)
         navigationController?.pushViewController(notesVC, animated: true)
     }
     

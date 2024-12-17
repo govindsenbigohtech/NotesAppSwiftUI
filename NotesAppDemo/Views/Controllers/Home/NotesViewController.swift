@@ -429,11 +429,6 @@ class NotesViewController: UIViewController {
         }
     
     @objc func confirmDiscard() {
-        for subview in view.subviews {
-            if subview.backgroundColor == UIColor.lightGray.withAlphaComponent(0.8) || subview.backgroundColor == .appGray {
-                subview.removeFromSuperview()
-            }
-        }
         onDismiss?()
         self.dismiss(animated: true, completion: nil)
         
