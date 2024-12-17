@@ -97,7 +97,7 @@ class NotesViewController: UIViewController {
         editButton = UIButton()
         editButton.setImage(UIImage(named: "edit"), for: .normal)
         editButton.setTitleColor(.background, for: .normal)
-        editButton.backgroundColor = .gray
+        editButton.backgroundColor = .appGray
         editButton.layer.cornerRadius = 15
         editButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(editButton)
