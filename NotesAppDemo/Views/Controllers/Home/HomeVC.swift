@@ -86,10 +86,10 @@ class HomeVC: UIViewController {
         addButton = UIButton()
         addButton.setImage(UIImage(named: "add"), for: .normal)
         addButton.setTitleColor(.label, for: .normal)
-        addButton.backgroundColor = .clear
+        addButton.backgroundColor = UIColor(named: "appBlack")
         addButton.layer.cornerRadius = 35
         addButton.layer.borderWidth = 1
-        addButton.layer.borderColor = UIColor.clear.cgColor
+        addButton.backgroundColor = UIColor(named: "appBlack")
         addButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addButton)
         
@@ -138,70 +138,17 @@ class HomeVC: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
-        // Adjusting constraints for tableView
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 20),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10) // Set bottom to 10
+            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 37),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
         
-        // Ensure addButton is above tableView visually
         view.bringSubviewToFront(addButton)
         
         tableView.isHidden = true
     }
-
-    
-//    private func setupUI() {
-//        self.setupImageForPlaceholder()
-//        
-//        addButton = UIButton()
-//        addButton.setImage(UIImage(named: "add"), for: .normal)
-//        addButton.setTitleColor(.label, for: .normal)
-//        addButton.backgroundColor = .clear
-//        addButton.layer.cornerRadius = 35
-//        addButton.layer.borderWidth = 1
-//        addButton.layer.borderColor = UIColor.clear.cgColor
-//        addButton.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(addButton)
-//        
-//        NSLayoutConstraint.activate([
-//            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-//            addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
-//            addButton.widthAnchor.constraint(equalToConstant: 70),
-//            addButton.heightAnchor.constraint(equalToConstant: 70)
-//        ])
-//        
-//        notesLabel = UILabel()
-//        notesLabel.text = "Notes"
-//        notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
-//        notesLabel.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(notesLabel)
-//        
-//        NSLayoutConstraint.activate([
-//            notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-//            notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
-//            notesLabel.widthAnchor.constraint(equalToConstant: 115),
-//            notesLabel.heightAnchor.constraint(equalToConstant: 59)
-//        ])
-//        
-//        searchButton = UIButton()
-//        searchButton.setImage(UIImage(named: "search"), for: .normal)
-//        searchButton.contentMode = .scaleAspectFit
-//        searchButton.translatesAutoresizingMaskIntoConstraints = false
-//        searchButton.backgroundColor = .appGray
-//        searchButton.layer.cornerRadius = 15
-//        searchButton.layer.masksToBounds = true
-//        view.addSubview(searchButton)
-//        
-//        NSLayoutConstraint.activate([
-//            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-//            searchButton.centerYAnchor.constraint(equalTo: notesLabel.centerYAnchor),
-//            searchButton.widthAnchor.constraint(equalToConstant: 50),
-//            searchButton.heightAnchor.constraint(equalToConstant: 50)
-//        ])
-//    }
     
     private func setupImageForPlaceholder() {
         placeholderView = UIView()
@@ -239,24 +186,6 @@ class HomeVC: UIViewController {
         
         placeholderView.isHidden = true
     }
-    
-//    private func setupTableView() {
-//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.backgroundColor = UIColor(named: "appBlack")
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(tableView)
-//        
-//        NSLayoutConstraint.activate([
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 20),
-//            tableView.bottomAnchor.constraint(equalTo: addButton.topAnchor, constant: -20)
-//        ])
-//        
-//        tableView.isHidden = true
-//    }
 }
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
