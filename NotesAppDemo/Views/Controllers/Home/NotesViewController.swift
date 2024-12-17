@@ -21,6 +21,9 @@ class NotesViewController: UIViewController {
     var isEditingMode: Bool = false
     var isNewNote: Bool = false
     
+    private var originalTitle: String?
+       private var originalBody: String?
+    
     var coreDataManager: CoreDataManager
     var onSave: ((String, String) -> Void)?
     var noteToEdit: Note?
@@ -51,6 +54,8 @@ class NotesViewController: UIViewController {
         } else if let note = noteToEdit {
             titleTextField.text = note.title
             bodyTextField.text = note.body
+            originalTitle = note.title
+            originalBody = note.body
             titleTextField.isEditable = false
             bodyTextField.isEditable = false
             saveButton.isHidden = true
@@ -341,7 +346,6 @@ class NotesViewController: UIViewController {
             label.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
             label.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10),
             
-            // Updated vertical constraint between label and buttons
             keepButton.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 5),
             keepButton.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -20),
             keepButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -20),
@@ -367,15 +371,12 @@ class NotesViewController: UIViewController {
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
 
-        // Check if title and body are valid
         if isValidNoteTitle(title) || isValidNoteBody(body) {
             coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
             onSave?(title, body)
             
-            // Dismiss the alert
             dismissAlert()
         } else {
-            // Show an alert or a message to the user indicating that the note is invalid
             showInvalidNoteAlert()
         }
     }
@@ -404,15 +405,18 @@ class NotesViewController: UIViewController {
     }
     
     @objc func dismissView() {
-        let title = titleTextField.text ?? ""
-            let body = bodyTextField.text ?? ""
-            
-            if isValidNoteTitle(title) || isValidNoteBody(body) {
-                showDiscardAlert()
-            } else {
-                self.dismiss(animated: true, completion: nil)
-            }
+        if hasChanges() {
+            showDiscardAlert()
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
+    
+    private func hasChanges() -> Bool {
+            let currentTitle = titleTextField.text ?? ""
+            let currentBody = bodyTextField.text ?? ""
+            return currentTitle != originalTitle || currentBody != originalBody
+        }
     
     @objc func confirmDiscard() {
         for subview in view.subviews {
@@ -424,13 +428,19 @@ class NotesViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
+        
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
         if isValidNoteTitle(title) || isValidNoteBody(body) {
                showSaveAlert(title: title, body: body)
            } else {
-               self.dismiss(animated: true, completion: nil)
+               self.dismiss(animated: false, completion: nil)
            }
+        if hasChanges() {
+                   showDiscardAlert()
+               } else {
+                   self.dismiss(animated: false, completion: nil)
+               }
         
     }
 }
