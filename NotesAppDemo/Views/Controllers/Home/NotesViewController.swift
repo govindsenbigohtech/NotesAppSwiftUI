@@ -422,12 +422,6 @@ class NotesViewController: UIViewController {
         }
     }
     
-//    private func hasChanges() -> Bool {
-//            let currentTitle = titleTextField.text ?? ""
-//            let currentBody = bodyTextField.text ?? ""
-//            return currentTitle != originalTitle || currentBody != originalBody
-//        }
-    
     private func hasChanges() -> Bool {
            let currentTitle = titleTextField.text ?? ""
            let currentBody = bodyTextField.text ?? ""
@@ -455,17 +449,6 @@ class NotesViewController: UIViewController {
                navigationController?.popViewController(animated: true)
            }
        }
-    
-//    @objc func backButtonTapped() {
-//        let title = titleTextField.text ?? ""
-//        let body = bodyTextField.text ?? ""
-//
-//        if hasChanges() {
-//            showSaveAlert(title: title, body: body)
-//        } else {
-//            navigationController?.popViewController(animated: true)
-//        }
-//    }
 }
 
 extension NotesViewController: UITextViewDelegate {
