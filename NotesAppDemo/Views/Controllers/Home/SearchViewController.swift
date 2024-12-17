@@ -38,7 +38,6 @@ class SearchViewController: UIViewController {
         searchBar.layer.masksToBounds = true
         searchBar.backgroundColor = UIColor(named: "appBlack")
         searchBar.isTranslucent = true
-//        searchBar.searchTextField.backgroundColor = .appGray
         
         view.addSubview(searchBar)
         
