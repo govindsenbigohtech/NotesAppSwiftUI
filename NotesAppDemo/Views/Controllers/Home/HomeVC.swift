@@ -68,8 +68,9 @@ class HomeVC: UIViewController {
         notesVC.onSave = { [weak self] title, body in
             self?.viewModel.addNote(title: title, body: body)
         }
-        notesVC.modalPresentationStyle = .fullScreen
-        present(notesVC, animated: true, completion: nil)
+//        notesVC.modalPresentationStyle = .fullScreen
+//        present(notesVC, animated: true, completion: nil)
+        navigationController?.pushViewController(notesVC, animated: true)
     }
     
     
@@ -209,7 +210,8 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
             self?.viewModel.fetchNotes()
         }
         notesVC.modalPresentationStyle = .fullScreen
-        present(notesVC, animated: true, completion: nil)
+//        present(notesVC, animated: true, completion: nil)
+        navigationController?.pushViewController(notesVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

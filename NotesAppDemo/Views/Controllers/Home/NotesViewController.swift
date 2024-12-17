@@ -439,12 +439,14 @@ class NotesViewController: UIViewController {
         if isValidNoteTitle(title) || isValidNoteBody(body) {
                showSaveAlert(title: title, body: body)
            } else {
-               self.dismiss(animated: false, completion: nil)
+//               self.dismiss(animated: false, completion: nil)
+               navigationController?.popViewController(animated: false)
            }
         if hasChanges() {
                    showDiscardAlert()
                } else {
-                   self.dismiss(animated: false, completion: nil)
+//                   self.dismiss(animated: false, completion: nil)
+                   navigationController?.popViewController(animated: false)
                }
         
     }
