@@ -437,7 +437,6 @@ class NotesViewController: UIViewController {
         onDismiss?()
         self.dismiss(animated: true, completion: nil)
         
-        // This is my code, on tap of dismissTheView, confirmDiscard, saveButtonInAlertTapped and dismissView, it is getting dismiss, but I also want to pop the view controller which is behind this, make use of closure for it
     }
     
     @objc func backButtonTapped() {
@@ -447,14 +446,11 @@ class NotesViewController: UIViewController {
         if isValidNoteTitle(title) || isValidNoteBody(body) {
                showSaveAlert(title: title, body: body)
            } else {
-//               self.dismiss(animated: false, completion: nil)
                navigationController?.popViewController(animated: false)
            }
         if hasChanges() {
-//                   showDiscardAlert()
             showSaveAlert(title: title, body: body)
                } else {
-//                   self.dismiss(animated: false, completion: nil)
                    navigationController?.popViewController(animated: false)
                }
         
@@ -501,7 +497,6 @@ extension NotesViewController: UITextViewDelegate {
             return false
         }
         return true
-        // When I am pressing back button , then I am seeing label.text = "Are you sure you want to discard your changes?" first instead of
     }
     
     func textViewDidChange(_ textView: UITextView) {
