@@ -20,6 +20,7 @@ class NotesViewController: UIViewController {
     
     var isEditingMode: Bool = false
     var isNewNote: Bool = false
+    var onDismiss: (() -> Void)?
     
     private var originalTitle: String?
        private var originalBody: String?
@@ -369,6 +370,7 @@ class NotesViewController: UIViewController {
     }
     
     @objc func dismissTheView() {
+        onDismiss?()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -384,6 +386,9 @@ class NotesViewController: UIViewController {
         } else {
             showInvalidNoteAlert()
         }
+        
+        onDismiss?()
+        self.dismiss(animated: true, completion: nil)
     }
 
     private func isValidNoteTitle(_ title: String) -> Bool {
@@ -429,7 +434,10 @@ class NotesViewController: UIViewController {
                 subview.removeFromSuperview()
             }
         }
+        onDismiss?()
         self.dismiss(animated: true, completion: nil)
+        
+        // This is my code, on tap of dismissTheView, confirmDiscard, saveButtonInAlertTapped and dismissView, it is getting dismiss, but I also want to pop the view controller which is behind this, make use of closure for it
     }
     
     @objc func backButtonTapped() {
