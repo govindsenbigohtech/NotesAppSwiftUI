@@ -435,20 +435,17 @@ class NotesViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        
         let title = titleTextField.text ?? ""
         let body = bodyTextField.text ?? ""
-        if isValidNoteTitle(title) || isValidNoteBody(body) {
-               showSaveAlert(title: title, body: body)
-           } else {
-               navigationController?.popViewController(animated: false)
-           }
+
+        // Check if there are changes
         if hasChanges() {
+            // If there are changes, show the save alert
             showSaveAlert(title: title, body: body)
-               } else {
-                   navigationController?.popViewController(animated: false)
-               }
-        
+        } else {
+            // If there are no changes, simply pop the view controller
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
