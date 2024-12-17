@@ -208,7 +208,6 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         notesVC.onSave = { [weak self] title, body in
             self?.viewModel.fetchNotes()
         }
-        // When going from plus button, my titleTextField and bodyTextField color is same which I want, also titlePlaceholder and bodyPlaceholder color is same, but when I am going from selecting tableview cell, then my titleTextField and bodyTextField color is getting changed, please rectify it
         notesVC.modalPresentationStyle = .fullScreen
         present(notesVC, animated: true, completion: nil)
     }
