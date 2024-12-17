@@ -443,7 +443,8 @@ class NotesViewController: UIViewController {
                navigationController?.popViewController(animated: false)
            }
         if hasChanges() {
-                   showDiscardAlert()
+//                   showDiscardAlert()
+            showSaveAlert(title: title, body: body)
                } else {
 //                   self.dismiss(animated: false, completion: nil)
                    navigationController?.popViewController(animated: false)
@@ -492,6 +493,7 @@ extension NotesViewController: UITextViewDelegate {
             return false
         }
         return true
+        // When I am pressing back button , then I am seeing label.text = "Are you sure you want to discard your changes?" first instead of
     }
     
     func textViewDidChange(_ textView: UITextView) {
