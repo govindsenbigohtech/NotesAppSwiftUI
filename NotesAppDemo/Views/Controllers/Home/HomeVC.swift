@@ -178,6 +178,7 @@ class HomeVC: UIViewController {
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = UIColor(named: "appBlack")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
