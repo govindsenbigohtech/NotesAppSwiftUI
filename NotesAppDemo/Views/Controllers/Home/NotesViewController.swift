@@ -422,11 +422,22 @@ class NotesViewController: UIViewController {
         }
     }
     
+//    private func hasChanges() -> Bool {
+//            let currentTitle = titleTextField.text ?? ""
+//            let currentBody = bodyTextField.text ?? ""
+//            return currentTitle != originalTitle || currentBody != originalBody
+//        }
+    
     private func hasChanges() -> Bool {
-            let currentTitle = titleTextField.text ?? ""
-            let currentBody = bodyTextField.text ?? ""
-            return currentTitle != originalTitle || currentBody != originalBody
-        }
+           let currentTitle = titleTextField.text ?? ""
+           let currentBody = bodyTextField.text ?? ""
+           
+           // Check if the current title and body are different from the original
+           let isTitleChanged = currentTitle != originalTitle && currentTitle != titlePlaceholder
+           let isBodyChanged = currentBody != originalBody && currentBody != bodyPlaceholder
+           
+           return isTitleChanged || isBodyChanged
+       }
     
     @objc func confirmDiscard() {
         onDismiss?()
@@ -435,15 +446,26 @@ class NotesViewController: UIViewController {
     }
     
     @objc func backButtonTapped() {
-        let title = titleTextField.text ?? ""
-        let body = bodyTextField.text ?? ""
+           let title = titleTextField.text ?? ""
+           let body = bodyTextField.text ?? ""
 
-        if hasChanges() {
-            showSaveAlert(title: title, body: body)
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
-    }
+           if hasChanges() {
+               showSaveAlert(title: title, body: body)
+           } else {
+               navigationController?.popViewController(animated: true)
+           }
+       }
+    
+//    @objc func backButtonTapped() {
+//        let title = titleTextField.text ?? ""
+//        let body = bodyTextField.text ?? ""
+//
+//        if hasChanges() {
+//            showSaveAlert(title: title, body: body)
+//        } else {
+//            navigationController?.popViewController(animated: true)
+//        }
+//    }
 }
 
 extension NotesViewController: UITextViewDelegate {
