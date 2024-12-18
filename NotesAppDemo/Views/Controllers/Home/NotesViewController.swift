@@ -128,7 +128,7 @@ class NotesViewController: UIViewController {
         titleTextField = UITextView()
         titleTextField.text = "Title"
         titleTextField.textColor = .appLightGray
-        titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
+        titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
         titleTextField.backgroundColor = UIColor(named: "appBlack")
         titleTextField.isScrollEnabled = false
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
