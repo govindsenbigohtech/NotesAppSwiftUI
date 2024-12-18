@@ -95,20 +95,17 @@ class HomeVC: UIViewController {
         floatingButton.backgroundColor = UIColor(named: "appBlack")
         floatingButton.tintColor = .white
         
-        // Shadow 1: Horizontal -5px, Vertical 0px, Blur 10px
         floatingButton.layer.shadowColor = UIColor.black.cgColor
-        floatingButton.layer.shadowOpacity = 0.4  // Corresponds to the transparency of #00000066
-        floatingButton.layer.shadowRadius = 10    // Blur radius
-        floatingButton.layer.shadowOffset = CGSize(width: -5, height: 0) // -5px horizontal offset, 0px vertical
+        floatingButton.layer.shadowOpacity = 0.4
+        floatingButton.layer.shadowRadius = 10
+        floatingButton.layer.shadowOffset = CGSize(width: -5, height: 0)
         
-        // Shadow 2: Horizontal 0px, Vertical 5px, Blur 10px
         let shadowLayer = CALayer()
         shadowLayer.shadowColor = UIColor.black.cgColor
         shadowLayer.shadowOpacity = 0.4
         shadowLayer.shadowRadius = 10
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 5) // 0px horizontal offset, 5px vertical offset
+        shadowLayer.shadowOffset = CGSize(width: 0, height: 5)
         
-        // Add shadow layer to the floating button
         floatingButton.layer.addSublayer(shadowLayer)
         
         view.addSubview(floatingButton)
