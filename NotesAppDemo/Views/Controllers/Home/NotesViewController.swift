@@ -365,7 +365,7 @@ class NotesViewController: UIViewController {
             discardButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
-        keepButton.addTarget(self, action: #selector(dismissTheView), for: .touchUpInside)
+        keepButton.addTarget(self, action: #selector(saveButtonInAlertTapped), for: .touchUpInside)
         discardButton.addTarget(self, action: #selector(confirmDiscard), for: .touchUpInside)
     }
     
