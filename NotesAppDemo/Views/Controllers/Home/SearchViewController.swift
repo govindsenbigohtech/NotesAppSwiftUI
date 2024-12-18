@@ -30,16 +30,21 @@ class SearchViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         
+        // Create a container view for the search bar
+        let searchContainerView = UIView()
+        searchContainerView.backgroundColor = UIColor(named: "appGray")
+        searchContainerView.layer.cornerRadius = 30
+        searchContainerView.layer.masksToBounds = true
+        searchContainerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(searchContainerView)
+        
         searchBar.delegate = self
         searchBar.placeholder = "Search by the keyword..."
+        searchBar.backgroundImage = UIImage() // Remove the search bar background
+        searchBar.searchTextField.backgroundColor = UIColor(named: "appGray")
+        searchBar.searchTextField.leftView = nil // Remove the search icon
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        
-        searchBar.layer.cornerRadius = 30
-        searchBar.layer.masksToBounds = true
-        searchBar.backgroundColor = UIColor(named: "appBlack")
-        searchBar.isTranslucent = true
-        
-        view.addSubview(searchBar)
+        searchContainerView.addSubview(searchBar)
         
         tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
         tableView.dataSource = self
@@ -65,12 +70,17 @@ class SearchViewController: UIViewController {
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
-            searchBar.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
-            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            searchBar.heightAnchor.constraint(equalToConstant: 50),
+            searchContainerView.topAnchor.constraint(equalTo: backButton.bottomAnchor, constant: 10),
+            searchContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            searchContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            searchContainerView.heightAnchor.constraint(equalToConstant: 50),
             
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 10),
+            searchBar.topAnchor.constraint(equalTo: searchContainerView.topAnchor),
+            searchBar.leadingAnchor.constraint(equalTo: searchContainerView.leadingAnchor, constant: 10),
+            searchBar.trailingAnchor.constraint(equalTo: searchContainerView.trailingAnchor, constant: -10),
+            searchBar.bottomAnchor.constraint(equalTo: searchContainerView.bottomAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: searchContainerView.bottomAnchor, constant: 10),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
