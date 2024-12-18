@@ -11,8 +11,6 @@ import MaterialComponents.MaterialButtons
 
 class HomeVC: UIViewController {
     
-    var notesImageView: UIImageView!
-    var addButton: UIButton!
     var notesLabel: UILabel!
     var searchButton: UIButton!
     let tableView = UITableView()
