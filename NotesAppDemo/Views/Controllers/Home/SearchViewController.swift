@@ -59,7 +59,7 @@ class SearchViewController: UIViewController {
         view.addSubview(noResultsImageView)
         
         noResultsLabel.text = "File not found. Try searching again."
-        noResultsLabel.textColor = .white
+        noResultsLabel.textColor = UIColor.background
         noResultsLabel.textAlignment = .center
         noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
         noResultsLabel.isHidden = true
