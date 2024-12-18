@@ -429,7 +429,6 @@ class NotesViewController: UIViewController {
            let currentTitle = titleTextField.text ?? ""
            let currentBody = bodyTextField.text ?? ""
            
-           // Check if the current title and body are different from the original
            let isTitleChanged = currentTitle != originalTitle && currentTitle != titlePlaceholder
            let isBodyChanged = currentBody != originalBody && currentBody != bodyPlaceholder
            
@@ -438,7 +437,7 @@ class NotesViewController: UIViewController {
     
     @objc func confirmDiscard() {
         onDismiss?()
-        self.dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
         
     }
     
