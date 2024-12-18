@@ -393,23 +393,6 @@ class NotesViewController: UIViewController {
             showInvalidNoteAlert()
         }
     }
-    
-//    @objc func saveButtonInAlertTapped() {
-//        let title = titleTextField.text ?? ""
-//        let body = bodyTextField.text ?? ""
-//
-//        if isValidNoteTitle(title) || isValidNoteBody(body) {
-//            coreDataManager.saveNote(title: title, body: body, note: noteToEdit)
-//            onSave?(title, body)
-//            
-//            dismissAlert()
-//        } else {
-//            showInvalidNoteAlert()
-//        }
-//        
-//        onDismiss?()
-//        self.dismiss(animated: true, completion: nil)
-//    }
 
     private func isValidNoteTitle(_ title: String) -> Bool {
         return !title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty && title != titlePlaceholder
@@ -468,7 +451,6 @@ class NotesViewController: UIViewController {
            } else {
                navigationController?.popViewController(animated: true)
            }
-        // When flow is going from edit button then save button, when I am saving it then it is or tapping on save button I need it to go to homeVC
        }
 }
 

@@ -30,7 +30,6 @@ class SearchViewController: UIViewController {
         backButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backButton)
         
-        // Create a container view for the search bar
         let searchContainerView = UIView()
         searchContainerView.backgroundColor = UIColor(named: "appGray")
         searchContainerView.layer.cornerRadius = 30
@@ -40,9 +39,9 @@ class SearchViewController: UIViewController {
         
         searchBar.delegate = self
         searchBar.placeholder = "Search by the keyword..."
-        searchBar.backgroundImage = UIImage() // Remove the search bar background
+        searchBar.backgroundImage = UIImage()
         searchBar.searchTextField.backgroundColor = UIColor(named: "appGray")
-        searchBar.searchTextField.leftView = nil // Remove the search icon
+        searchBar.searchTextField.leftView = nil 
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchContainerView.addSubview(searchBar)
         
