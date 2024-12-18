@@ -235,10 +235,12 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] (_, _, completionHandler) in
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
             self?.viewModel.deleteNote(at: indexPath.row)
             completionHandler(true)
         }
+        
+        deleteAction.image = UIImage(named: "delete")
         deleteAction.backgroundColor = .appRed
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
