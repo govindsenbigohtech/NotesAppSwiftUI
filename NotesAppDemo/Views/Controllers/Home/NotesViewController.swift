@@ -139,7 +139,7 @@ class NotesViewController: UIViewController {
             
             titleTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             titleTextField.topAnchor.constraint(equalTo: saveButton.bottomAnchor, constant: 40),
-            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            titleTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             titleTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
         
@@ -156,7 +156,7 @@ class NotesViewController: UIViewController {
         NSLayoutConstraint.activate([
             bodyTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
             bodyTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 40),
-            bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bodyTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
             bodyTextField.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
