@@ -49,6 +49,7 @@ class NotesViewController: UIViewController {
             titleTextField.isEditable = true
             bodyTextField.isEditable = true
             titleTextField.text = titlePlaceholder
+            titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 48)
             titleTextField.textColor = .appLightGray
             bodyTextField.text = bodyPlaceholder
             bodyTextField.textColor = .appLightGray
@@ -128,7 +129,7 @@ class NotesViewController: UIViewController {
         titleTextField = UITextView()
         titleTextField.text = "Title"
         titleTextField.textColor = .appLightGray
-        titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
+//        titleTextField.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
         titleTextField.backgroundColor = UIColor(named: "appBlack")
         titleTextField.isScrollEnabled = false
         titleTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -461,6 +462,7 @@ extension NotesViewController: UITextViewDelegate {
                 textView.text = ""
                 textView.textColor = .background
             }
+            textView.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 35)
         } else if textView == bodyTextField {
             if textView.text == "Type something..." {
                 textView.text = ""
