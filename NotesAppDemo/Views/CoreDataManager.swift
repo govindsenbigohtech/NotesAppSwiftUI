@@ -35,25 +35,6 @@ class CoreDataManager {
            }
        }
     
-//    func saveNote(title: String, body: String, note: Note? = nil) {
-//        let context = persistentContainer.viewContext
-//        
-//        if let noteToUpdate = note {
-//            noteToUpdate.title = title
-//            noteToUpdate.body = body
-//        } else {
-//            let newNote = Note(context: context)
-//            newNote.title = title
-//            newNote.body = body
-//        }
-//        
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Failed to save note: \(error)")
-//        }
-//    }
-    
     func delete(note: Note) {
         let context = persistentContainer.viewContext
         context.delete(note)
