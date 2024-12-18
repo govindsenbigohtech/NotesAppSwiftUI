@@ -30,9 +30,9 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "dismissView()"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
+            landmarkName = "dismissAlert()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,9 +46,9 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
-            landmarkName = "dismissView()"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
+            landmarkName = "dismissAlert()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -62,10 +62,10 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
-            landmarkName = "NotesViewController"
-            landmarkType = "21">
+            startingLineNumber = "457"
+            endingLineNumber = "457"
+            landmarkName = "confirmDiscard()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -78,9 +78,9 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
-            landmarkName = "textViewDidBeginEditing(_:)"
+            startingLineNumber = "459"
+            endingLineNumber = "459"
+            landmarkName = "confirmDiscard()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,9 +94,9 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "hasChanges()"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
+            landmarkName = "dismissAlert()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -110,9 +110,9 @@
             filePath = "NotesAppDemo/Views/Controllers/Home/NotesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
-            landmarkName = "hasChanges()"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "dismissAlert()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

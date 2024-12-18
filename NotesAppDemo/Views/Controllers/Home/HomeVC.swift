@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import MaterialComponents.MaterialButtons
 
 class HomeVC: UIViewController {
     
@@ -16,6 +17,8 @@ class HomeVC: UIViewController {
     var searchButton: UIButton!
     let tableView = UITableView()
     var placeholderView: UIView!
+    
+    var floatingButton: MDCFloatingButton!
     
     private var viewModel: HomeViewModel!
     
@@ -38,7 +41,7 @@ class HomeVC: UIViewController {
         
         bindViewModel()
         
-        addButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         
         viewModel.fetchNotes()
@@ -69,14 +72,12 @@ class HomeVC: UIViewController {
             self?.viewModel.addNote(title: title, body: body)
         }
         
-        
         notesVC.onDismiss = { [weak self] in
             self?.navigationController?.popViewController(animated: true)
         }
         
         navigationController?.pushViewController(notesVC, animated: true)
     }
-    
     
     @objc func searchButtonTapped() {
         let searchVC = SearchViewController()
@@ -88,22 +89,38 @@ class HomeVC: UIViewController {
     private func setupUI() {
         self.setupImageForPlaceholder()
         
-        addButton = UIButton()
-        addButton.setImage(UIImage(named: "add"), for: .normal)
-        addButton.setTitleColor(.label, for: .normal)
-        addButton.backgroundColor = UIColor(named: "appBlack")
-        addButton.layer.cornerRadius = 35
-        addButton.layer.borderWidth = 1
-        addButton.backgroundColor = UIColor(named: "appBlack")
-        addButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(addButton)
+        floatingButton = MDCFloatingButton(shape: .default)
+        floatingButton.translatesAutoresizingMaskIntoConstraints = false
+        floatingButton.setImage(UIImage(named: "add"), for: .normal)
+        floatingButton.backgroundColor = UIColor(named: "appBlack")
+        floatingButton.tintColor = .white
         
+        // Shadow 1: Horizontal -5px, Vertical 0px, Blur 10px
+        floatingButton.layer.shadowColor = UIColor.black.cgColor
+        floatingButton.layer.shadowOpacity = 0.4  // Corresponds to the transparency of #00000066
+        floatingButton.layer.shadowRadius = 10    // Blur radius
+        floatingButton.layer.shadowOffset = CGSize(width: -5, height: 0) // -5px horizontal offset, 0px vertical
+        
+        // Shadow 2: Horizontal 0px, Vertical 5px, Blur 10px
+        let shadowLayer = CALayer()
+        shadowLayer.shadowColor = UIColor.black.cgColor
+        shadowLayer.shadowOpacity = 0.4
+        shadowLayer.shadowRadius = 10
+        shadowLayer.shadowOffset = CGSize(width: 0, height: 5) // 0px horizontal offset, 5px vertical offset
+        
+        // Add shadow layer to the floating button
+        floatingButton.layer.addSublayer(shadowLayer)
+        
+        view.addSubview(floatingButton)
+
         NSLayoutConstraint.activate([
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-            addButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
-            addButton.widthAnchor.constraint(equalToConstant: 70),
-            addButton.heightAnchor.constraint(equalToConstant: 70)
+            floatingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+            floatingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
+            floatingButton.widthAnchor.constraint(equalToConstant: 70),
+            floatingButton.heightAnchor.constraint(equalToConstant: 70)
         ])
+        
+        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         
         notesLabel = UILabel()
         notesLabel.text = "Notes"
@@ -150,8 +167,8 @@ class HomeVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
         ])
         
-        view.bringSubviewToFront(addButton)
-        
+        view.bringSubviewToFront(floatingButton)
+
         tableView.isHidden = true
     }
     
@@ -226,4 +243,3 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
 }
-
