@@ -120,6 +120,7 @@ class HomeVC: UIViewController {
         notesLabel = UILabel()
         notesLabel.text = "Notes"
         notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
+        notesLabel.textColor = UIColor(named: "background")
         notesLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(notesLabel)
         
@@ -182,6 +183,7 @@ class HomeVC: UIViewController {
         placeholderLabel.text = "Create your first note!"
         placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
         placeholderLabel.textAlignment = .center
+        placeholderLabel.textColor = UIColor(named: "background")
         placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
         placeholderView.addSubview(placeholderLabel)
         
