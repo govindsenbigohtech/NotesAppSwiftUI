@@ -5,240 +5,340 @@
 //  Created by Govind-BigOh on 11/12/24.
 //
 
+//import UIKit
+//import CoreData
+//import MaterialComponents.MaterialButtons
+//
+//class HomeVC: UIViewController {
+//    
+//    var notesLabel: UILabel!
+//    var searchButton: UIButton!
+//    let tableView = UITableView()
+//    var placeholderView: UIView!
+//    
+//    var floatingButton: MDCFloatingButton!
+//    
+//    private var viewModel: HomeViewModel!
+//    
+//    class func instantiate() -> HomeVC {
+//        let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
+//        return vc
+//    }
+//    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        view.backgroundColor = UIColor(named: "appBlack")
+//        
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let persistentContainer = appDelegate.getPersistentContainer()
+//        let coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
+//        viewModel = HomeViewModel(coreDataManager: coreDataManager)
+//        
+//        setupUI()
+//        setupTableView()
+//        
+//        bindViewModel()
+//        
+//        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+//        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+//        
+//        viewModel.fetchNotes()
+//    }
+//    
+//    private func bindViewModel() {
+//        viewModel.onNotesUpdated = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.updateUI()
+//            }
+//        }
+//        
+//        viewModel.onError = { error in
+//            print(error)
+//        }
+//    }
+//    
+//    private func updateUI() {
+//        tableView.reloadData()
+//        placeholderView.isHidden = !viewModel.notes.isEmpty
+//        tableView.isHidden = viewModel.notes.isEmpty
+//    }
+//    
+//    @objc func plusButtonTapped() {
+//        let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
+//        notesVC.isNewNote = true
+//        notesVC.onSave = { [weak self] title, body in
+//            self?.viewModel.addNote(title: title, body: body)
+//        }
+//        
+//        notesVC.onDismiss = { [weak self] in
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//        
+//        navigationController?.pushViewController(notesVC, animated: true)
+//    }
+//    
+//    @objc func searchButtonTapped() {
+//        let searchVC = SearchViewController()
+//        searchVC.updateNotes(viewModel.notes)
+//        searchVC.modalPresentationStyle = .fullScreen
+//        present(searchVC, animated: true, completion: nil)
+//    }
+//    
+//    private func setupUI() {
+//        self.setupImageForPlaceholder()
+//        
+//        floatingButton = MDCFloatingButton(shape: .default)
+//        floatingButton.translatesAutoresizingMaskIntoConstraints = false
+//        floatingButton.setImage(UIImage(named: "add"), for: .normal)
+//        floatingButton.backgroundColor = UIColor(named: "appBlack")
+//        floatingButton.tintColor = .white
+//        
+//        floatingButton.layer.shadowColor = UIColor.black.cgColor
+//        floatingButton.layer.shadowOpacity = 0.4
+//        floatingButton.layer.shadowRadius = 10
+//        floatingButton.layer.shadowOffset = CGSize(width: -5, height: 0)
+//        
+//        let shadowLayer = CALayer()
+//        shadowLayer.shadowColor = UIColor.black.cgColor
+//        shadowLayer.shadowOpacity = 0.4
+//        shadowLayer.shadowRadius = 10
+//        shadowLayer.shadowOffset = CGSize(width: 0, height: 5)
+//        
+//        floatingButton.layer.addSublayer(shadowLayer)
+//        
+//        view.addSubview(floatingButton)
+//
+//        NSLayoutConstraint.activate([
+//            floatingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
+//            floatingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
+//            floatingButton.widthAnchor.constraint(equalToConstant: 70),
+//            floatingButton.heightAnchor.constraint(equalToConstant: 70)
+//        ])
+//        
+//        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+//        
+//        notesLabel = UILabel()
+//        notesLabel.text = "Notes"
+//        notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
+//        notesLabel.textColor = UIColor(named: "background")
+//        notesLabel.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(notesLabel)
+//        
+//        NSLayoutConstraint.activate([
+//            notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
+//            notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
+//            notesLabel.widthAnchor.constraint(equalToConstant: 115),
+//            notesLabel.heightAnchor.constraint(equalToConstant: 59)
+//        ])
+//        
+//        searchButton = UIButton()
+//        searchButton.setImage(UIImage(named: "search"), for: .normal)
+//        searchButton.contentMode = .scaleAspectFit
+//        searchButton.translatesAutoresizingMaskIntoConstraints = false
+//        searchButton.backgroundColor = .appGray
+//        searchButton.layer.cornerRadius = 15
+//        searchButton.layer.masksToBounds = true
+//        view.addSubview(searchButton)
+//        
+//        NSLayoutConstraint.activate([
+//            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+//            searchButton.centerYAnchor.constraint(equalTo: notesLabel.centerYAnchor),
+//            searchButton.widthAnchor.constraint(equalToConstant: 50),
+//            searchButton.heightAnchor.constraint(equalToConstant: 50)
+//        ])
+//    }
+//
+//    private func setupTableView() {
+//        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
+//        tableView.dataSource = self
+//        tableView.delegate = self
+//        tableView.backgroundColor = UIColor(named: "appBlack")
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(tableView)
+//        
+//        NSLayoutConstraint.activate([
+//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 37),
+//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+//        ])
+//        
+//        view.bringSubviewToFront(floatingButton)
+//
+//        tableView.isHidden = true
+//    }
+//    
+//    private func setupImageForPlaceholder() {
+//        placeholderView = UIView()
+//        placeholderView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(placeholderView)
+//        
+//        let placeholderImageView = UIImageView()
+//        placeholderImageView.image = UIImage(named: "notesImg")
+//        placeholderImageView.contentMode = .scaleAspectFit
+//        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
+//        placeholderView.addSubview(placeholderImageView)
+//        
+//        let placeholderLabel = UILabel()
+//        placeholderLabel.text = "Create your first note!"
+//        placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
+//        placeholderLabel.textAlignment = .center
+//        placeholderLabel.textColor = UIColor(named: "background")
+//        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
+//        placeholderView.addSubview(placeholderLabel)
+//        
+//        NSLayoutConstraint.activate([
+//            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            placeholderView.widthAnchor.constraint(equalToConstant: 350),
+//            placeholderView.heightAnchor.constraint(equalToConstant: 287),
+//            
+//            placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+//            placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
+//            placeholderImageView.widthAnchor.constraint(equalToConstant: 350),
+//            placeholderImageView.heightAnchor.constraint(equalToConstant: 287),
+//            
+//            placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
+//            placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
+//            placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
+//        ])
+//        
+//        placeholderView.isHidden = true
+//    }
+//}
+//
+//extension HomeVC: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return viewModel.notes.count
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
+//        cell.configureCell(note: viewModel.notes[indexPath.row])
+//        cell.selectionStyle = .none
+//        return cell
+//    }
+//    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedNote = viewModel.notes[indexPath.row]
+//        let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
+//        notesVC.noteToEdit = selectedNote
+//        notesVC.isNewNote = false
+//        notesVC.onSave = { [weak self] title, body in
+//            self?.viewModel.fetchNotes()
+//        }
+//        notesVC.modalPresentationStyle = .fullScreen
+//        navigationController?.pushViewController(notesVC, animated: true)
+//    }
+//    
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
+//            self?.viewModel.deleteNote(at: indexPath.row)
+//            completionHandler(true)
+//        }
+//        
+//        deleteAction.image = UIImage(named: "delete")
+//        deleteAction.backgroundColor = .appRed
+//        return UISwipeActionsConfiguration(actions: [deleteAction])
+//    }
+//}
+
 import UIKit
-import CoreData
-import MaterialComponents.MaterialButtons
+import SwiftUI
 
 class HomeVC: UIViewController {
-    
-    var notesLabel: UILabel!
-    var searchButton: UIButton!
-    let tableView = UITableView()
-    var placeholderView: UIView!
-    
-    var floatingButton: MDCFloatingButton!
-    
     private var viewModel: HomeViewModel!
+    private var hostingController: UIHostingController<HomeView>!
     
-    class func instantiate() -> HomeVC {
-        let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
-        return vc
-    }
-    
+        class func instantiate() -> HomeVC {
+            let vc = UIStoryboard.home.instanceOf(viewController: HomeVC.self)!
+            return vc
+        }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "appBlack")
-        
+
+        // Initialize ViewModel
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let persistentContainer = appDelegate.getPersistentContainer()
         let coreDataManager = CoreDataManager(persistentContainer: persistentContainer)
         viewModel = HomeViewModel(coreDataManager: coreDataManager)
-        
-        setupUI()
-        setupTableView()
-        
-        bindViewModel()
-        
-        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        
+
+        // SwiftUI View
+        let homeView = HomeView(
+            notes: .constant(viewModel.notes),
+            onAddNote: { [weak self] in self?.addNote() },
+            onSearch: { [weak self] in self?.searchNotes() },
+            onDelete: { [weak self] index in self?.deleteNoteAt(index) },
+            onSelectNote: { [weak self] index in self?.selectNoteAt(index) }
+        )
+
+        hostingController = UIHostingController(rootView: homeView)
+        addChild(hostingController)
+        view.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+
         viewModel.fetchNotes()
+        bindViewModel()
     }
-    
+
     private func bindViewModel() {
         viewModel.onNotesUpdated = { [weak self] in
             DispatchQueue.main.async {
-                self?.updateUI()
+                self?.updateSwiftUIView()
             }
         }
-        
-        viewModel.onError = { error in
-            print(error)
-        }
     }
-    
-    private func updateUI() {
-        tableView.reloadData()
-        placeholderView.isHidden = !viewModel.notes.isEmpty
-        tableView.isHidden = viewModel.notes.isEmpty
+
+    private func updateSwiftUIView() {
+        hostingController.rootView = HomeView(
+            notes: .constant(viewModel.notes),
+            onAddNote: { [weak self] in self?.addNote() },
+            onSearch: { [weak self] in self?.searchNotes() },
+            onDelete: { [weak self] index in self?.deleteNoteAt(index) },
+            onSelectNote: { [weak self] index in self?.selectNoteAt(index) }
+        )
     }
-    
-    @objc func plusButtonTapped() {
+
+    private func addNote() {
         let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
         notesVC.isNewNote = true
         notesVC.onSave = { [weak self] title, body in
             self?.viewModel.addNote(title: title, body: body)
         }
-        
-        notesVC.onDismiss = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
         navigationController?.pushViewController(notesVC, animated: true)
     }
-    
-    @objc func searchButtonTapped() {
+
+    private func searchNotes() {
         let searchVC = SearchViewController()
         searchVC.updateNotes(viewModel.notes)
         searchVC.modalPresentationStyle = .fullScreen
         present(searchVC, animated: true, completion: nil)
     }
-    
-    private func setupUI() {
-        self.setupImageForPlaceholder()
-        
-        floatingButton = MDCFloatingButton(shape: .default)
-        floatingButton.translatesAutoresizingMaskIntoConstraints = false
-        floatingButton.setImage(UIImage(named: "add"), for: .normal)
-        floatingButton.backgroundColor = UIColor(named: "appBlack")
-        floatingButton.tintColor = .white
-        
-        floatingButton.layer.shadowColor = UIColor.black.cgColor
-        floatingButton.layer.shadowOpacity = 0.4
-        floatingButton.layer.shadowRadius = 10
-        floatingButton.layer.shadowOffset = CGSize(width: -5, height: 0)
-        
-        let shadowLayer = CALayer()
-        shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOpacity = 0.4
-        shadowLayer.shadowRadius = 10
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 5)
-        
-        floatingButton.layer.addSublayer(shadowLayer)
-        
-        view.addSubview(floatingButton)
 
-        NSLayoutConstraint.activate([
-            floatingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -35),
-            floatingButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -49),
-            floatingButton.widthAnchor.constraint(equalToConstant: 70),
-            floatingButton.heightAnchor.constraint(equalToConstant: 70)
-        ])
-        
-        floatingButton.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-        
-        notesLabel = UILabel()
-        notesLabel.text = "Notes"
-        notesLabel.font = UIFont.font(family: .nunito, sizeFamily: .semibold, size: 43)
-        notesLabel.textColor = UIColor(named: "background")
-        notesLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(notesLabel)
-        
-        NSLayoutConstraint.activate([
-            notesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            notesLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 75),
-            notesLabel.widthAnchor.constraint(equalToConstant: 115),
-            notesLabel.heightAnchor.constraint(equalToConstant: 59)
-        ])
-        
-        searchButton = UIButton()
-        searchButton.setImage(UIImage(named: "search"), for: .normal)
-        searchButton.contentMode = .scaleAspectFit
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        searchButton.backgroundColor = .appGray
-        searchButton.layer.cornerRadius = 15
-        searchButton.layer.masksToBounds = true
-        view.addSubview(searchButton)
-        
-        NSLayoutConstraint.activate([
-            searchButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            searchButton.centerYAnchor.constraint(equalTo: notesLabel.centerYAnchor),
-            searchButton.widthAnchor.constraint(equalToConstant: 50),
-            searchButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+    private func deleteNoteAt(_ index: Int) {
+        viewModel.deleteNote(at: index)
     }
 
-    private func setupTableView() {
-        tableView.register(NoteTableViewCell.self, forCellReuseIdentifier: "NoteCell")
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.backgroundColor = UIColor(named: "appBlack")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-        
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: notesLabel.bottomAnchor, constant: 37),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
-        ])
-        
-        view.bringSubviewToFront(floatingButton)
-
-        tableView.isHidden = true
-    }
-    
-    private func setupImageForPlaceholder() {
-        placeholderView = UIView()
-        placeholderView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(placeholderView)
-        
-        let placeholderImageView = UIImageView()
-        placeholderImageView.image = UIImage(named: "notesImg")
-        placeholderImageView.contentMode = .scaleAspectFit
-        placeholderImageView.translatesAutoresizingMaskIntoConstraints = false
-        placeholderView.addSubview(placeholderImageView)
-        
-        let placeholderLabel = UILabel()
-        placeholderLabel.text = "Create your first note!"
-        placeholderLabel.font = UIFont.font(family: .nunito, sizeFamily: .regular, size: 20)
-        placeholderLabel.textAlignment = .center
-        placeholderLabel.textColor = UIColor(named: "background")
-        placeholderLabel.translatesAutoresizingMaskIntoConstraints = false
-        placeholderView.addSubview(placeholderLabel)
-        
-        NSLayoutConstraint.activate([
-            placeholderView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            placeholderView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            placeholderView.widthAnchor.constraint(equalToConstant: 350),
-            placeholderView.heightAnchor.constraint(equalToConstant: 287),
-            
-            placeholderImageView.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-            placeholderImageView.topAnchor.constraint(equalTo: placeholderView.topAnchor),
-            placeholderImageView.widthAnchor.constraint(equalToConstant: 350),
-            placeholderImageView.heightAnchor.constraint(equalToConstant: 287),
-            
-            placeholderLabel.centerXAnchor.constraint(equalTo: placeholderView.centerXAnchor),
-            placeholderLabel.topAnchor.constraint(equalTo: placeholderImageView.bottomAnchor, constant: 5),
-            placeholderLabel.widthAnchor.constraint(equalTo: placeholderView.widthAnchor),
-        ])
-        
-        placeholderView.isHidden = true
-    }
-}
-
-extension HomeVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.notes.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteCell", for: indexPath) as! NoteTableViewCell
-        cell.configureCell(note: viewModel.notes[indexPath.row])
-        cell.selectionStyle = .none
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedNote = viewModel.notes[indexPath.row]
+    private func selectNoteAt(_ index: Int) {
+        let selectedNote = viewModel.notes[index]
         let notesVC = NotesViewController(coreDataManager: viewModel.coreDataManager)
         notesVC.noteToEdit = selectedNote
         notesVC.isNewNote = false
-        notesVC.onSave = { [weak self] title, body in
+        notesVC.onSave = { [weak self] _, _ in
             self?.viewModel.fetchNotes()
         }
-        notesVC.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(notesVC, animated: true)
     }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: nil) { [weak self] (_, _, completionHandler) in
-            self?.viewModel.deleteNote(at: indexPath.row)
-            completionHandler(true)
-        }
-        
-        deleteAction.image = UIImage(named: "delete")
-        deleteAction.backgroundColor = .appRed
-        return UISwipeActionsConfiguration(actions: [deleteAction])
-    }
 }
+
+
